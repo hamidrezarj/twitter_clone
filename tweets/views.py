@@ -85,7 +85,7 @@ def logout_view(request):
 def personal_page(request, username):
     posts = Post.objects.filter(user__username=username)
     print(posts)
-    return render(request, 'tweets/user.html', {'posts': posts, 'username': username})
+    return render(request, 'tweets', {'posts': posts, 'username': username})
 
 
 def hashtag_view(request):
