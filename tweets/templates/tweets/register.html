@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if error_message %}
+    <p>User with username <b>{{username}}</b> already exists.</p>
+    {% endif %}
+
+    {% if pass_error %}
+    <p>Passwords don't match!</p>
+    {% endif %}
+    <div class="container">
+        <form action="{% url 'tweets:register' %}" method="post">
+            {% csrf_token %}
+            <input type="text" id="username" name="username" placeholder="Name" required class="form-control">
+            <input type="password" id="password" name="password" placeholder="Password" required class="form-control">
+            <input type="password" id="password2" name="password2" placeholder="Confirm Password" required
+                   class="form-control">
+            <input type="email" id="email" name="email" placeholder="Email" required class="form-control">
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

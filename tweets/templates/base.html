@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Template Page</title>
+    {% include 'base/css.html' %}
+</head>
+<body>
+
+    {% include 'base/navbar.html' with brand_name='Tweeter' %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
