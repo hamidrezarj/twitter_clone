@@ -7,4 +7,4 @@ This is a simple post-blog project.
 * users can comment on tweets.
 * users can Like each other's tweets.
 * only logged-in users can have some of these features.
->>>>>>> fc76ee03ad125dbf774099df35355d0251180c9c
+
