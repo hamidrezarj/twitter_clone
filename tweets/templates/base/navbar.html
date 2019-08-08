@@ -1,5 +1,5 @@
 {% url 'tweets:index' as index_url %}
-{% url 'tweets:user' as user_url %}
+{% url 'tweets:user' user.username as user_url %}
 {% url 'tweets:register' as register_url %}
 {% url 'tweets:login' as login_url %}
 {% url 'tweets:logout' as logout_url %}
