@@ -7,8 +7,10 @@
 </head>
 <body>
 
-    {% include 'base/navbar.html' with brand_name='Tweeter' %}
+    <div class="container" style="height: 100%; margin-left: 5%; margin-right: 5%;">
+        {% include 'base/navbar.html' with brand_name='Tweeter' %}
 
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
