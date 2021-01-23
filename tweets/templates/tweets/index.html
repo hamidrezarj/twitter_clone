@@ -1,58 +1,50 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'tweets/index.css' %}">
+{% endblock %}
+
 {% block content %}
 
-    {% if request.user.is_authenticated %}
+{% if request.user.is_authenticated %}
+<div class="container col-6" style="display: inline-block; min-height: 100vh;">
+    <h3>{{user.username}},Welcome to our homepage!</h3>
+    {% for tweet in recent_tweets %}
+    <div class="jumbotron" style="padding-left: 1%; padding-right: 1%; padding-top: 10%; padding-bottom: 3%">
 
-        <div class="container">
-            <h3>{{ user.username }},Welcome to our homepage!</h3>
-
-            <div class="row">
-                <div class="col">
-                    <form action="{% url 'tweets:post' %}" method="post">
-                        {% csrf_token %}
-
-                        <input type="text" class="form-control" name="content" placeholder="Write something here..">
-                        <button class="btn btn-primary">Send</button>
-                    </form>
-                </div>
-            </div>
-
-            <hr>
-
-
-            {% for tweet in recent_tweets %}
-                <div class="jumbotron">
-                    <b>{{ tweet.user.username }}</b>:
-                    <p>{{ tweet.content }}</p>
-                    <hr class="my-4">
-                    {% if tweet.comment_set %}
-                        {% for c in tweet.comment_set.all %}
-                            <p><b>{{ c }}</b> says: {{ c.content }}</p>
-                        {% endfor %}
-                    {% endif %}
-                    <a class="btn btn-primary " href="{% url 'tweets:comment' tweet.id %}" role="button">Comment</a>
-                    <form action="{% url 'tweets:index' %}" method="post">
-                        {% csrf_token %}
-                        {#                        {% if tweet.is_liked %}#}
-                        {#                            <button class="btn btn-danger" name="post_id" value="{{ tweet.id }}">Dislike</button>#}
-                        {#                        {% else %}#}
-                        <button class="btn btn-danger like_btn" name="post_id" value="{{ tweet.id }}">Like</button>
-                        {#                        {% endif %}#}
-                    </form>
-                    <p>{{ tweet.likes_set.count }} Like{{ tweet.likes_set.count|pluralize }}</p>
-                </div>
-                <hr>
+        <div class="container col-sm-4 col-md-3 col-lg-3" style="display: inline-block; min-height: 100%; vertical-align:top">
+            <img class="rounded float-left" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
+        </div>
+        <div class="container  col-sm-7 col-md-8 col-lg-8" style="display: inline-block;">
+            <b>{{tweet.user.username}}</b>
+            <p>{{tweet.content}}</p>
+            <hr class="my-4">
+            {% if tweet.comment_set %}
+            {% for c in tweet.comment_set.all %}
+            <p><b>{{c}}</b> says: {{c.content}}</p>
             {% endfor %}
-            {% else %}
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h3>You should first log in to see the content.</h3>
-                        <a href="{% url 'tweets:login' %}">Log in now</a>
-                    </div>
-                </div>
+            {% endif %}
+            <a class="btn btn-primary " href="{% url 'tweets:comment' tweet.id %}" role="button">Comment</a>
+            <form action="{% url 'tweets:index' %}" method="post">
+                {% csrf_token %}
+                {% if tweet.is_liked %}
+                <button class="btn btn-danger" name="post_id" value="{{tweet.id}}">Dislike</button>
+                {% else %}
+                <button class="btn btn-danger" name="post_id" value="{{tweet.id}}">Like</button>
+                {% endif %}
+            </form>
+            <p>{{tweet.likes_set.count}} Like{{tweet.likes_set.count|pluralize}}</p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>You should first log in to see the content.</h3>
+                <a href="{% url 'tweets:login' %}">Log in now</a>
             </div>
         </div>
     {% endif %}

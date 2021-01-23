@@ -5,47 +5,48 @@
 {% url 'tweets:logout' as logout_url %}
 {% url 'tweets:post' as post_url %}
 
+<div class="container col-4" style="display: inline-block; min-height: 100vh;vertical-align:top;">
+    <nav class="navbar nav-tabs flex-column navbar-expand navbar-dark bg-dark col-12" style="display: inline-block; min-height: 100vh;">
+        <a class="navbar-brand col-lg-8" href="{% url 'tweets:index' %}">{% if brand_name %}{{brand_name}}{% else %}No brand name{% endif %}</a>
+    {#    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"#}
+    {#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+    {#        <span class="navbar-toggler-icon"></span>#}
+    {#    </button>#}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'tweets:index' %}">{% if brand_name %}{{brand_name}}{% else %}No brand name{% endif %}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <div class="navbar-nav collapse navbar-collapse col-lg-8" id="navbarSupportedContent">
+            <ul class="flex-column navbar-nav mr-auto">
+                <li class="nav-item {% if request.path == index_url %} active{% endif %}">
+                    <a class="nav-link" href="{{index_url}}">Home</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item {% if request.path == post_url %} active{% endif %}">
+                    <a class="nav-link" href="{{post_url}}">Post</a>
+                </li>
+                {% endif %}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% if request.path == index_url %} active{% endif %}">
-                <a class="nav-link" href="{{index_url}}">Home</a>
-            </li>
-            {% if request.user.is_authenticated %}
-            <li class="nav-item {% if request.path == post_url %} active{% endif %}">
-                <a class="nav-link" href="{{post_url}}">Post</a>
-            </li>
-            {% endif %}
+                <li class="nav-item {% if request.path == register_url %} active{% endif %}">
+                    <a class="nav-link" href="{{register_url}}">Register</a>
+                </li>
+                <li class="nav-item {% if request.path == login_url %} active{% endif %}">
+                    <a class="nav-link" href="{{login_url}}">Login</a>
+                </li>
 
-            <li class="nav-item {% if request.path == register_url %} active{% endif %}">
-                <a class="nav-link" href="{{register_url}}">Register</a>
-            </li>
-            <li class="nav-item {% if request.path == login_url %} active{% endif %}">
-                <a class="nav-link" href="{{login_url}}">Login</a>
-            </li>
+                {% if request.user.is_authenticated %}
 
-            {% if request.user.is_authenticated %}
+                <li class="nav-item {% if request.path == user_url %} active{% endif %}">
+                    <a class="nav-link" href="{{user_url}}">Your Blog</a>
+                </li>
 
-            <li class="nav-item {% if request.path == user_url %} active{% endif %}">
-                <a class="nav-link" href="{{user_url}}">Your Blog</a>
-            </li>
+                <li class="nav-item {% if request.path == logout_url %} active{% endif %}">
+                    <a class="nav-link" href="{{logout_url}}">Logout</a>
+                </li>
+                {% endif %}
 
-            <li class="nav-item {% if request.path == logout_url %} active{% endif %}">
-                <a class="nav-link" href="{{logout_url}}">Logout</a>
-            </li>
-            {% endif %}
-
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+            </ul>
+    {#        <form class="form-inline my-2 my-lg-0 col-lg-12">#}
+    {#            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+    {#            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+    {#        </form>#}
+        </div>
+    </nav>
+</div>
