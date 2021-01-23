@@ -4,7 +4,7 @@
 {% url 'tweets:login' as login_url %}
 {% url 'tweets:logout' as logout_url %}
 {% url 'tweets:post' as post_url %}
-{% url 'tweets:profile' as profile_url %}
+{% url 'tweets:profile' user.username as profile_url %}
 
 <div class="container col-4" style="display: inline-block; min-height: 100vh;vertical-align:top;">
     <nav class="navbar nav-stacked flex-column navbar-expand navbar-dark bg-dark col-12" style="display: inline-block; min-height: 100vh;">
