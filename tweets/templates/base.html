@@ -9,9 +9,17 @@
 </head>
 <body>
 
-    {% include 'base/navbar.html' with brand_name='Tweeter' %}
+    <div class="container" style="height: 100%; margin-left: 5%; margin-right: 5%;">
+        {% include 'base/navbar.html' with brand_name='Tweeter' %}
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
 
     {% block content %}{% endblock %}
     {% block script %}{% endblock %}
+    </div>
+
 </body>
 </html>
