@@ -1,7 +1,8 @@
 
 console.log("Hello world.");
 
-var likeBtns = $(".like_btn");
+
+var likeBtns = document.getElementsByClassName("like_btn");
 
 console.log(likeBtns);
 for(let btn of likeBtns){
