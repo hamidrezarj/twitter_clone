@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect, HttpResponse, get_object_or_404
 from django.utils import timezone
-from .models import Post, Comment, Likes
+from .models import Post, Comment, Likes, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -8,8 +8,8 @@ from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
-    # context['is_liked'] =
-    # context = dict()
+    user_profile = get_object_or_404(Profile, user=request.user)
+
     btn_text = request.GET.get('btn_text', None)
     print('button text: ', btn_text)
     # handle like or dislike by AJAX
@@ -19,12 +19,12 @@ def index(request):
 
         if btn_text == 'Dislike':
             # then add to number of likes
-            if not liked_tweet.likes_set.filter(user=request.user).exists():
-                liked_tweet.likes_set.create(user=request.user)
+            if not liked_tweet.likes_set.filter(profile=user_profile).exists():
+                liked_tweet.likes_set.create(profile=user_profile)
                 liked_tweet.save()
 
         else:
-            Likes.objects.get(user=request.user, post=liked_tweet).delete()
+            Likes.objects.get(profile=user_profile, post=liked_tweet).delete()
 
         # context = dict()
         # context['is_liked'] = Tracklike.objects.filter(post=liked_tweet, user=request.user).exists()
@@ -39,7 +39,7 @@ def index(request):
         recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
         is_liked = []
         for i, tweet in enumerate(recent_tweets):
-            if tweet.likes_set.filter(user=request.user):
+            if tweet.likes_set.filter(profile=user_profile):
                 is_liked.append(True)
             else:
                 is_liked.append(False)
@@ -67,7 +67,8 @@ def index(request):
 
 def post(request):
     if request.method == 'POST':
-        Post.objects.create(user=request.user, content=request.POST['content'], pub_date=timezone.now())
+        user_profile = get_object_or_404(Profile, user=request.user)
+        Post.objects.create(profile=user_profile, content=request.POST['content'], pub_date=timezone.now())
         return HttpResponseRedirect(reverse('tweets:index'))
 
     elif request.method == 'GET':
@@ -108,6 +109,7 @@ def register_view(request):
             password2 = request.POST.get('password2')
             if password == password2:
                 new_user = User.objects.create_user(username=username, email=email, password=password)
+                Profile.objects.create(user=new_user)
                 print(new_user)
                 return redirect('/login')
             else:
@@ -125,7 +127,7 @@ def logout_view(request):
 
 
 def personal_page(request, username):
-    posts = Post.objects.filter(user__username=username)
+    posts = Post.objects.filter(profile__user__username=username)
     print(posts)
     return render(request, 'tweets/user.html', {'posts': posts, 'username': username})
 
@@ -138,13 +140,14 @@ def comment_view(request, post_id):
     if request.method == 'POST':
         content = request.POST.get('content')
         p = get_object_or_404(Post, id=post_id)
-        Comment.objects.create(post=p, content=content, user=request.user)
+        user_profile = get_object_or_404(Profile, user=request.user)
+        Comment.objects.create(post=p, content=content, profile=user_profile)
         return redirect('/')
     return render(request, 'tweets/comment.html', {'post_id': post_id})
 
 
 def profile_view(request, username):
-    personal_tweets = Post.objects.filter(user__username=username)
+    personal_tweets = Post.objects.filter(profile__user__username=username)
 
     return render(request, 'tweets/profile.html', {'tweets': personal_tweets})
 

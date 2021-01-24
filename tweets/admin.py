@@ -14,5 +14,4 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [CommentInline, LikesInline]
 
 admin.site.register(Post, PostAdmin)
-# admin.site.register(Comment)
-# admin.site.register(Likes)
+admin.site.register(Profile)
