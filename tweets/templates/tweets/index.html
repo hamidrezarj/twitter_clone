@@ -8,8 +8,7 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
-        <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block"
-             style="min-height: 100vh;">
+        <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
         <h3>{{ user.username }},Welcome to our homepage!</h3>
         {% include 'tweets/post.html' with brand_name='Tweeter' %}
 
@@ -70,7 +69,7 @@
             </div>
         </div>
     {% endif %}
-
+</div>
 
 {% endblock %}
 
