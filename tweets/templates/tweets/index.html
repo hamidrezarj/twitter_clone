@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
 {% if request.user.is_authenticated %}
 <div class="container col-6" style="display: inline-block; min-height: 100vh;">
     <h3>{{user.username}},Welcome to our homepage!</h3>
-    {% for tweet in recent_tweets %}
+  
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'tweets:post' %}" method="post">
+                {% csrf_token %}
+
+                <input type="text" class="form-control" name="content" placeholder="Write something here..">
+                <button class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+  
+    {% for liked, tweet in zipped %}
     <div class="jumbotron" style="padding-left: 1%; padding-right: 1%; padding-top: 10%; padding-bottom: 3%">
 
         <div class="container col-sm-4 col-md-3 col-lg-3" style="display: inline-block; min-height: 100%; vertical-align:top">
@@ -21,15 +34,19 @@
             {% endfor %}
             {% endif %}
             <a class="btn btn-primary " href="{% url 'tweets:comment' tweet.id %}" role="button">Comment</a>
-            <form action="{% url 'tweets:index' %}" method="post">
-                {% csrf_token %}
-                {% if tweet.is_liked %}
-                <button class="btn btn-danger" name="post_id" value="{{tweet.id}}">Dislike</button>
-                {% else %}
-                <button class="btn btn-danger" name="post_id" value="{{tweet.id}}">Like</button>
-                {% endif %}
+          
+            <form action="{% url 'tweets:index' %}" method="post" change-data-url="{% url 'tweets:index' %}">
+            {% csrf_token %}
+           
+            {% if liked %}
+                <button class="btn btn-danger like_btn" name="post_id" state="dislike" value="{{ tweet.id }}">Dislike</button>
+            {% else %}
+                <button class="btn btn-danger like_btn" name="post_id" state="like" value="{{ tweet.id }}">Like</button>
+            {% endif %}
+          
             </form>
-            <p>{{tweet.likes_set.count}} Like{{tweet.likes_set.count|pluralize}}</p>
+            <p><span id="like_cnt">{{ tweet.likes_set.count }}</span> Like{{ tweet.likes_set.count|pluralize }}</p>
+          
         </div>
     </div>
     <hr>
@@ -42,11 +59,13 @@
                 <a href="{% url 'tweets:login' %}">Log in now</a>
             </div>
         </div>
-    </div>
-</div>
-{% endif %}
+    {% endif %}
 
 
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'tweets/index.js' %}"></script>
 {% endblock %}
 
 

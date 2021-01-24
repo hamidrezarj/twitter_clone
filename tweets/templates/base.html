@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+
     <meta charset="UTF-8">
     <title>Base Template Page</title>
     {% include 'base/css.html' %}
@@ -10,7 +12,14 @@
     <div class="container" style="height: 100%; margin-left: 5%; margin-right: 5%;">
         {% include 'base/navbar.html' with brand_name='Tweeter' %}
 
-        {% block content %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+
+    {% block content %}{% endblock %}
+    {% block script %}{% endblock %}
     </div>
+
 </body>
 </html>
