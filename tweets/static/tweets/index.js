@@ -1,6 +1,31 @@
 
 console.log("Hello world.");
 
+var myModal = document.getElementById('exampleModal')
+var myInput = document.getElementById('exampleTrigger')
+var mycloseBTN = document.getElementById('closeBTN')
+window.addEventListener('load', (event) => {
+    console.log("listener added")
+    // $(document).ready(function(){
+    //     $('#exampleModal').modal("show");
+    // });
+
+    myInput.onclick = ev => {
+            $('#exampleModal').modal("show");
+    }
+    mycloseBTN.onclick = ev => {
+            $('#exampleModal').modal("hide");
+    }
+    // $('#exampleModal').modal();
+    // $("#yourModal").modal("hide");
+});
+
+// window.addEventListener('load', (event) => {
+//     console.log("listener added")
+//     myModal.addEventListener('shown.bs.modal', function () {
+//       myInput.focus()
+//     })
+// });
 
 var likeBtns = document.getElementsByClassName("like_btn");
 
