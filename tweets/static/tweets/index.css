@@ -37,3 +37,7 @@
     min-width: 120px;
     max-width: 200px;
 }
+
+.modal-lg {
+    width: 70vw;
+}
