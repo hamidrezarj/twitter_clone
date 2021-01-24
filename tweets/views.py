@@ -88,7 +88,7 @@ def login_view(request):
             # context['form'] = LoginForm()
             login(request, user)
             # LoginForm()
-            return redirect('/post')
+            return HttpResponseRedirect(reverse('tweets:index'))
         else:
             if User.objects.filter(username=username).count() > 0:
                 return render(request, 'tweets/login.html', {'wrong_pass': 'Wrong password for this username!'})
