@@ -12,8 +12,8 @@
     border-radius: 3rem!important;
 }
 
-.inline {
-    display: inline-block;
+.inlineBlock {
+    display: inline-block!important;
 }
 
 .fullHeightPFP {
@@ -26,4 +26,15 @@
     padding-right: 1%;
     padding-top: 10%;
     padding-bottom: 3%;
+}
+
+.profile_top {
+    min-width: 100%;
+    min-height: 100%;
+    /*justify-content: space-between;*/
+}
+
+.sideNav {
+    min-width: 120px;
+    max-width: 200px;
 }

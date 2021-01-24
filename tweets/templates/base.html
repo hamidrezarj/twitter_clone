@@ -8,9 +8,9 @@
     {% include 'base/css.html' %}
     {% block styles %}{% endblock %}
 </head>
-<body>
+<body class="bg-secondary">
 
-    <div class="container bg-secondary" style="height: 100%;">
+    <div class="container" style="height: 100%;">
         {% include 'base/navbar.html' with brand_name='Tweeter' %}
 
     {% block content %}{% endblock %}
