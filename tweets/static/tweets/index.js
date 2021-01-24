@@ -4,20 +4,41 @@ console.log("Hello world.");
 var myModal = document.getElementById('exampleModal')
 var myInput = document.getElementById('exampleTrigger')
 var mycloseBTN = document.getElementById('closeBTN')
+
+
+var editModal = document.getElementById('editModal')
+var editModalTrigger = document.getElementById('editTrigger')
+var editCloseBTN = document.getElementById('editCloseBTN')
 window.addEventListener('load', (event) => {
-    console.log("listener added")
+    console.log("Listeners Added")
     // $(document).ready(function(){
-    //     $('#exampleModal').modal("show");
+    //     $('#editModal').modal("show");
     // });
 
-    myInput.onclick = ev => {
-            $('#exampleModal').modal("show");
+    if(myInput) {
+        myInput.onclick = ev => {
+                $('#exampleModal').modal("show");
+        }
     }
-    mycloseBTN.onclick = ev => {
-            $('#exampleModal').modal("hide");
+    if(mycloseBTN) {
+        mycloseBTN.onclick = ev => {
+                $('#exampleModal').modal("hide");
+        }
     }
-    // $('#exampleModal').modal();
-    // $("#yourModal").modal("hide");
+
+    if(editModalTrigger) {
+        editModalTrigger.onclick = ev => {
+                $('#editModal').modal("show");
+        }
+    }
+    if(editCloseBTN) {
+        editCloseBTN.onclick = ev => {
+                $('#editModal').modal("hide");
+        }
+    }
+    // $('#exampleModal').on('hidden.bs.modal', function (e) {
+    //     console.log("hidden!")
+    // })
 });
 
 // window.addEventListener('load', (event) => {

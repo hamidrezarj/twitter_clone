@@ -9,6 +9,43 @@
 
     {% if request.user.is_authenticated %}
         <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block" style="min-height: 100vh;">
+
+            <!-- Modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModal">TWEET</h5>
+                            <button type="button" id="editCloseBTN" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+    {#                        {% include 'tweets/comment.html' with brand_name='Tweeter' %}#}
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                                ullam unde.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                                ullam unde.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                                ullam unde.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                                ullam unde.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                                ullam unde.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="jumbotron pl-1 pr-1">
                 <div class="profile_top d-md-flex d-sm-inline">
                     <div class="d-flex  ml-md-1 ml-sm-3">
@@ -16,7 +53,7 @@
                              src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120"/>
                     </div>
                     <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
-                        <button class="btn btn-info inline">
+                        <button class="btn btn-info inline" id="editTrigger" data-toggle="modal" data-target="#editModal">
                             Edit Profile
                         </button>
                     </div>
