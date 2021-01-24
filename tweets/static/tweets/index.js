@@ -1,15 +1,23 @@
 
 console.log("Hello world.");
 
-let likeBtns = $(".like_btn");
+var likeBtns = $(".like_btn");
+
 console.log(likeBtns);
 for(let btn of likeBtns){
 
     btn.onclick = function (event) {
-        if(this.innerHTML === "Like")
-            this.innerHTML = "Dislike";
-        else
-            this.innerHTML = "Like";
+        let btn_state = btn.getAttribute("next-state");
+        console.log("next-state: ", );
+        if(btn_state === "Like"){
+            // this.innerHTML = "Dislike";
+            btn.setAttribute("next-state", "Dislike");
+        }
+
+        else {
+            // this.innerHTML = "Like";
+            btn.setAttribute("next-state", "Like");
+        }
 
         // event.preventDefault();
         let form = $(this).closest("form");
@@ -21,7 +29,7 @@ for(let btn of likeBtns){
             url: form.attr("change-data-url"),
             data: {
                 'btn_value': $(this).val(),
-                'btn_text': btn.innerHTML,
+                'btn_text': btn.getAttribute("next-state"),
             },
             dataType: 'json',
             success: function (data) {
