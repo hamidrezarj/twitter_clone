@@ -23,6 +23,9 @@ class Post(models.Model):
     def __str__(self):
         return self.content
 
+    class Meta:
+        ordering = ('-pub_date', )
+
 
 class Comment(models.Model):
     content = models.TextField()
@@ -32,6 +35,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.profile.user.username
+
+    class Meta:
+        ordering = ('-pub_date', )
 
 
 class Likes(models.Model):
