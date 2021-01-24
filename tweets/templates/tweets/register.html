@@ -3,11 +3,11 @@
 {% block content %}
 
     {% if error_message %}
-    <p>User with username <b>{{username}}</b> already exists.</p>
+        <p>User with username <b>{{ username }}</b> already exists.</p>
     {% endif %}
 
     {% if pass_error %}
-    <p>Passwords don't match!</p>
+        <p>Passwords don't match!</p>
     {% endif %}
     <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
         <form action="{% url 'tweets:register' %}" method="post">

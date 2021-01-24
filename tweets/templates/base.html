@@ -10,11 +10,21 @@
 </head>
 <body class="bg-secondary">
 
-    <div class="container" style="height: 100%;">
-        {% include 'base/navbar.html' with brand_name='Tweeter' %}
+<div class="container" style="height: 100%;">
+    {% include 'base/navbar.html' with brand_name='Tweeter' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+            integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
 
     {% block content %}{% endblock %}
     {% block script %}{% endblock %}
-    </div>
+</div>
 </body>
 </html>

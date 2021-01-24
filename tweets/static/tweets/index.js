@@ -1,4 +1,12 @@
 
+console.log("testo")
+// $(function() {
+//     $('#exampleModal').modal({
+//         show: true,
+//         backdrop: 'static'
+//     });
+// })
+
 console.log("Hello world.");
 
 let likeBtns = document.getElementsByClassName('like_btn');
@@ -14,3 +22,12 @@ for(let btn of likeBtns){
         event.preventDefault();
     }
 }
+
+
+$('#exampleModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+
+// $(document).ready(function() {
+//   $("#exampleModal").modal();
+// });

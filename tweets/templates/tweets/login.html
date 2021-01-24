@@ -2,8 +2,9 @@
 
 {% block content %}
 
-{#    IDK HOW TO DO IT BUT AFTER LOGGING IN WE NEED TO FORWARD TO HOME PAGE NOT POST PAGE#}
-    <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block" style="display: inline-block;">
+    {#    IDK HOW TO DO IT BUT AFTER LOGGING IN WE NEED TO FORWARD TO HOME PAGE NOT POST PAGE#}
+    <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block"
+         style="display: inline-block;">
         <form action="{% url 'tweets:login' %}" method="post">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Name" class="form-control">
@@ -15,9 +16,9 @@
 
     <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
         {% if error_message %}
-        <h4>{{error_message}}</h4>
+            <h4>{{ error_message }}</h4>
         {% elif wrong_pass %}
-        <h4>{{wrong_pass}}</h4>
+            <h4>{{ wrong_pass }}</h4>
         {% endif %}
     </div>
 
