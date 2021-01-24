@@ -141,3 +141,11 @@ def comment_view(request, post_id):
         Comment.objects.create(post=p, content=content, user=request.user)
         return redirect('/')
     return render(request, 'tweets/comment.html', {'post_id': post_id})
+
+
+def profile_view(request, username):
+    personal_tweets = Post.objects.filter(user__username=username)
+
+    return render(request, 'tweets/profile.html', {'tweets': personal_tweets})
+
+

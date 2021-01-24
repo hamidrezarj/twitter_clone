@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <title>Base Template Page</title>
     {% include 'base/css.html' %}
+    {% block styles %}{% endblock %}
 </head>
-<body>
+<body class="bg-secondary">
 
-    <div class="container" style="height: 100%; margin-left: 5%; margin-right: 5%;">
+    <div class="container" style="height: 100%;">
         {% include 'base/navbar.html' with brand_name='Tweeter' %}
-
-
+      
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
@@ -20,6 +20,5 @@
     {% block content %}{% endblock %}
     {% block script %}{% endblock %}
     </div>
-
 </body>
 </html>

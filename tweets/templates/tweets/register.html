@@ -9,7 +9,7 @@
     {% if pass_error %}
     <p>Passwords don't match!</p>
     {% endif %}
-    <div class="container">
+    <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
         <form action="{% url 'tweets:register' %}" method="post">
             {% csrf_token %}
             <input type="text" id="username" name="username" placeholder="Name" required class="form-control">

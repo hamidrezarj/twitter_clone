@@ -4,25 +4,31 @@
 {% url 'tweets:login' as login_url %}
 {% url 'tweets:logout' as logout_url %}
 {% url 'tweets:post' as post_url %}
+{% url 'tweets:profile' user.username as profile_url %}
 
-<div class="container col-4" style="display: inline-block; min-height: 100vh;vertical-align:top;">
-    <nav class="navbar nav-tabs flex-column navbar-expand navbar-dark bg-dark col-12" style="display: inline-block; min-height: 100vh;">
-        <a class="navbar-brand col-lg-8" href="{% url 'tweets:index' %}">{% if brand_name %}{{brand_name}}{% else %}No brand name{% endif %}</a>
+<div class="sideNav" style="min-height: 100vh;vertical-align:top; position: fixed;">
+    <nav class="navbar nav-stacked flex-column navbar-expand navbar-dark bg-dark col-12 d-inline-block" style="min-height: 100vh;">
+        <a class="navbar-brand col-12" href="{% url 'tweets:index' %}">{% if brand_name %}{{brand_name}}{% else %}No brand name{% endif %}</a>
+
     {#    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"#}
     {#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
     {#        <span class="navbar-toggler-icon"></span>#}
     {#    </button>#}
 
-        <div class="navbar-nav collapse navbar-collapse col-lg-8" id="navbarSupportedContent">
+
+        <div class="navbar-nav collapse navbar-collapse col-12" id="navbarSupportedContent">
             <ul class="flex-column navbar-nav mr-auto">
                 <li class="nav-item {% if request.path == index_url %} active{% endif %}">
                     <a class="nav-link" href="{{index_url}}">Home</a>
                 </li>
+
                 {% if request.user.is_authenticated %}
-                <li class="nav-item {% if request.path == post_url %} active{% endif %}">
-                    <a class="nav-link" href="{{post_url}}">Post</a>
+                <li class="nav-item {% if request.path == profile_url %} active{% endif %}">
+                    <a class="nav-link" href="{{profile_url}}">Profile</a>
                 </li>
                 {% endif %}
+
+                {% if request.user.is_authenticated == False  %}
 
                 <li class="nav-item {% if request.path == register_url %} active{% endif %}">
                     <a class="nav-link" href="{{register_url}}">Register</a>
@@ -30,6 +36,10 @@
                 <li class="nav-item {% if request.path == login_url %} active{% endif %}">
                     <a class="nav-link" href="{{login_url}}">Login</a>
                 </li>
+
+                {% endif %}
+
+
 
                 {% if request.user.is_authenticated %}
 

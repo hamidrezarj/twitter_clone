@@ -1,4 +1,9 @@
-{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'tweets/index.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="col-6 w-50 flex-row" style="display: inline-block">
@@ -12,8 +17,13 @@
             </form>
 
 
-            <a href="{% url 'tweets:index' %}">See homepage..</a>
+{#            <a href="{% url 'tweets:index' %}">See homepage..</a>#}
+            <hr class="my-3">
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'tweets/index.js' %}"></script>
 {% endblock %}
