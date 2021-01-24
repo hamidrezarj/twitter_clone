@@ -1,12 +1,4 @@
 
-console.log("testo")
-// $(function() {
-//     $('#exampleModal').modal({
-//         show: true,
-//         backdrop: 'static'
-//     });
-// })
-
 console.log("Hello world.");
 
 var likeBtns = $(".like_btn");
@@ -52,11 +44,3 @@ for(let btn of likeBtns){
         });
     }
 }
-
-$('#exampleModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
-
-// $(document).ready(function() {
-//   $("#exampleModal").modal();
-// });
