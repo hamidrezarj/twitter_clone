@@ -12,7 +12,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModal">TWEET</h5>
@@ -21,22 +21,27 @@
                             </button>
                         </div>
                         <div class="modal-body">
-    {#                        {% include 'tweets/comment.html' with brand_name='Tweeter' %}#}
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                                ullam unde.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                                ullam unde.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                                ullam unde.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                                ullam unde.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                                quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                                ullam unde.</p>
+                            <form>
+                              <div class="container mb-3">
+                                <div class="row text-center">
+                                    <div class="col">
+                                      <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                        class="rounded-circle" style="width: 120px" alt="example placeholder avatar">
+                                    </div>
+                                </div>
+                                <div class="custom-file text-center">
+                                  <input type="file"  accept="image/*" class="custom-file-input" id="pfpFile" required>
+                                  <label class="btn btn-info" for="pfpFile">Choose Image...</label>
+                                </div>
+                              </div>
+
+                                <div class="container">
+                                  <div class="text-center">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" id="usernameChange" placeholder="Required name">
+                                  </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
