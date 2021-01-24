@@ -13,6 +13,17 @@
         <h3>{{ user.username }},Welcome to our homepage!</h3>
         {% include 'tweets/post.html' with brand_name='Tweeter' %}
 
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <form action="{% url 'tweets:post' %}" method="post">#}
+{#                    {% csrf_token %}#}
+{##}
+{#                    <input type="text" class="form-control" name="content" placeholder="Write something here..">#}
+{#                    <button class="btn btn-primary">Send</button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Launch demo modal
@@ -53,7 +64,8 @@
             </div>
         </div>
 
-        {% for tweet in recent_tweets %}
+{#        {% for tweet in recent_tweets %} #}
+	{% for liked, tweet in zipped %}
             <div class="jumbotron mb-0 pt-1 px-0"
                  style="padding-bottom: 3%">
 

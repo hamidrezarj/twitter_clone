@@ -5,20 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form action="{% url 'tweets:post' %}" method="post">
-                    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'tweets:post' %}" method="post">
+                {% csrf_token %}
 
-                    <input type="text" class="form-control" name="content" placeholder="Write something here..">
-                    <button class="btn btn-primary">Send</button>
-                </form>
+                <input type="text" class="form-control" name="content" placeholder="Write something here..">
+                <button class="btn btn-primary">Send</button>
+            </form>
 
 
-                {#            <a href="{% url 'tweets:index' %}">See homepage..</a>#}
-                <hr class="my-3">
-            </div>
+            {#            <a href="{% url 'tweets:index' %}">See homepage..</a>#}
+            <hr class="my-3">
         </div>
     </div>
 {% endblock %}
