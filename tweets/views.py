@@ -126,13 +126,19 @@ def hashtag_view(request):
 
 
 def comment_view(request, post_id):
+    tweet = get_object_or_404(Post, id=post_id)
+
     if request.method == 'POST':
         content = request.POST.get('content')
-        p = get_object_or_404(Post, id=post_id)
         user_profile = get_object_or_404(Profile, user=request.user)
-        Comment.objects.create(post=p, content=content, profile=user_profile)
+        Comment.objects.create(post=tweet, content=content, profile=user_profile)
         return redirect('/')
-    return render(request, 'tweets/comment.html', {'post_id': post_id})
+
+    comments = tweet.comment_set.all()
+    return render(request, 'tweets/tweet_with_replies.html', {
+        'post_id': post_id,
+        'tweet': tweet
+    })
 
 
 def profile_view(request, username):
