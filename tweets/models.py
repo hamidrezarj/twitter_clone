@@ -7,7 +7,7 @@ from datetime import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     following = models.ManyToManyField(User, related_name='following', blank=True)
-    profile_img = models.ImageField(upload_to='avatars', blank=True)
+    profile_img = models.ImageField(upload_to='avatars/', blank=True)
 
     def __str__(self):
         return self.user.username
@@ -17,7 +17,7 @@ class Post(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    media = models.FileField(upload_to='media', blank=True)
+    media = models.FileField(upload_to='user_files/', blank=True)
     is_liked = False
 
     def __str__(self):

@@ -3,6 +3,7 @@
 **/__pycache__/
 **/migrations/
 db.sqlite3
+media/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/django

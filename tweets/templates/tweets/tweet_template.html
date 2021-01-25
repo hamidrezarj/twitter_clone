@@ -1,12 +1,20 @@
+{% load static %}
 <div class="jumbotron mb-0 pt-1 px-0"
      style="padding-bottom: 3%">
 
     <div class="container col-3 col-sm-3 col-md-2 col-lg-1 d-inline-block pt-3"
          style="min-height: 100%; vertical-align:top">
         <a href="{% url 'tweets:profile' tweet.profile.user.username %}">
-            <img class="rounded float-left pfpSmol"
-                 src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                 style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
+            {% if tweet.profile.profile_img and tweet.profile.user == request.user %}
+                <img class="rounded float-left pfpSmol"
+                     src="{{ tweet.profile.profile_img.url }}"
+                     style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
+            {% else %}
+                <img class="rounded float-left pfpSmol"
+                     src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                     style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
+            {% endif %}
+
         </a>
     </div>
     <div class="container col-8 col-sm-8 col-md-9 col-lg-10 d-inline-block pr-0">
