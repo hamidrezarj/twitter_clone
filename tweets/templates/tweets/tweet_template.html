@@ -13,7 +13,7 @@
         <div class="d-flex">
             <b class="text-left pt-2"
                style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
-            <p class="text-muted pt-2 offset-sm-1 offset-md-1 offset-lg-1">yyyy/MM/dd</p>
+            <p class="text-muted pt-2 offset-sm-1 offset-md-1 offset-lg-1">{{ tweet.pub_date|date:"M j, Y" }}</p>
             <div class="d-flex justify-content-start mr-2 pt-2 offset-sm-1 offset-md-3 offset-lg-4">
                 <button class="btn btn-info inline">
                     Follow/Delete
