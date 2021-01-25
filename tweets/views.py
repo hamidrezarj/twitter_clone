@@ -137,11 +137,35 @@ def comment_view(request, post_id):
 
 def profile_view(request, username):
     personal_tweets = Post.objects.filter(profile__user__username=username)
-    user = User.objects.get(username=username)
-    profile = get_object_or_404(Profile, user=user)
+    user_profile = User.objects.get(username=username)
+    profile = get_object_or_404(Profile, user=user_profile)
+    logged_in_user = get_object_or_404(Profile, user=request.user)
+    is_followed = logged_in_user.following.filter(user=user_profile).exists()
 
     return render(request, 'tweets/profile.html', {
         'tweets': personal_tweets,
         'user_profile': profile,
-        'show_like': False
+        'show_like': False,
+        'is_followed': is_followed,
     })
+
+
+def toggle_follow_view(request, username):
+    user_to_follow = get_object_or_404(Profile, user__username=username)
+    current_user = get_object_or_404(Profile, user=request.user)
+    followed = False
+    updated = False
+    if request.user.is_authenticated:
+        if user_to_follow in current_user.following.all():
+            followed = False
+            current_user.following.remove(user_to_follow)
+        else:
+            followed = True
+            current_user.following.add(user_to_follow)
+        updated = True
+
+    data = {
+        'followed': followed,
+        'updated': updated
+    }
+    return JsonResponse(data)

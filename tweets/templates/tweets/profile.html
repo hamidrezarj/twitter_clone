@@ -76,10 +76,19 @@
                         {% else %}
                             {#                    IF ON ANOTHER USER PROFILE ^THIS HAS TO BE "FOLLOW/UNFOLLOW" BUTTON#}
                             <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
-                                <button class="btn btn-info inline" id="editTrigger" data-toggle="modal"
-                                        data-target="#editModal">
-                                    FOLLOW
-                                </button>
+
+                                {% if is_followed %}
+                                    <button class="btn btn-info inline" id="follow"
+                                            change-data-url="{% url 'tweets:follow' user_profile.user.username %}">
+                                        Unfollow
+                                    </button>
+                                {% else %}
+                                    <button class="btn btn-info inline" id="follow"
+                                            change-data-url="{% url 'tweets:follow' user_profile.user.username %}">
+                                        Follow
+                                    </button>
+                                {% endif %}
+
                             </div>
                         {% endif %}
                         {#                    ^THIS IS JUST FOR FUNCTIONALITY TEST OF FOLLOW FOR NOW#}
@@ -114,4 +123,5 @@
 
 {% block script %}
     <script src="{% static 'tweets/index.js' %}"></script>
+    <script src="{% static 'tweets/profile.js' %}"></script>
 {% endblock %}
