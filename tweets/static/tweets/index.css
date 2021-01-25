@@ -56,7 +56,7 @@
     color: rgb(21, 32, 43);
 }
 
-.border-left.border-tweeter , .border-top.border-tweeter{
+.border-left.border-tweeter,.border-top.border-tweeter{
     border-color: rgb(56, 68, 77) !important;
 }
 

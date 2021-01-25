@@ -4,9 +4,10 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
-        <div class="container col-8 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block px-1 border-left border-right border-tweeter">
+        <div class="container col-8 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block px-1 border-left border-right border-tweeter"
+        style="min-height: 100vh">
         <h3>{{ user.username }},Welcome to our homepage!</h3>
-        {% include 'tweets/post.html' with brand_name='Tweeter' %}
+{#        {% include 'tweets/post.html' with brand_name='Tweeter' %}#}
 
 
         <!-- Button trigger modal -->
@@ -14,42 +15,6 @@
                 data-target="#exampleModal">
             Launch example modal
         </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">TWEET</h5>
-                        <button type="button" id="closeBTN" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                            quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                            ullam unde.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                            quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                            ullam unde.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                            quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                            ullam unde.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                            quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                            ullam unde.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
-                            quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
-                            ullam unde.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         {% for l, t in zipped %}
             {% include 'tweets/tweet_template.html' with liked=l tweet=t show_like=show_like %}
@@ -65,6 +30,42 @@
             </div>
         </div>
     {% endif %}
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">TWEET</h5>
+                <button type="button" id="closeBTN" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                    quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                    ullam unde.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                    quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                    ullam unde.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                    quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                    ullam unde.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                    quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                    ullam unde.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum cumque dolor modi nulla
+                    quam, quis quod reiciendis sint veniam. A corporis facere ipsam libero neque rerum sit,
+                    ullam unde.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
