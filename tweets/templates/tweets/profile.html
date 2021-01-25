@@ -61,8 +61,15 @@
             <div class="jumbotron pl-1 pr-1">
                 <div class="profile_top d-md-flex d-sm-inline justify-content-between">
                     <div class="d-flex  ml-md-2 ml-sm-3">
-                        <img class="float-left pfpBeeg"
-                             src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"/>
+
+                        {% if user_profile.profile_img %}
+                            <img class="float-left pfpBeeg"
+                                 src="{{ user_profile.profile_img.url }}"/>
+                        {% else %}
+                            <img class="float-left pfpBeeg"
+                                 src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"/>
+                        {% endif %}
+
                     </div>
                     {#                    IMPORTANT: bottom div was made for 2 buttons!!#}
                     <div class="align-self-center">
