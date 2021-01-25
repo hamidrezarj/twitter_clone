@@ -4,9 +4,11 @@ from .models import Post, Comment, Likes, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required(login_url='/login/')
 def index(request):
     user_profile = get_object_or_404(Profile, user=request.user)
 
@@ -44,24 +46,11 @@ def index(request):
             else:
                 is_liked.append(False)
 
-        # context['recent_tweets'] = recent_tweets
-
-        # if request.method == 'POST':
-        #     p = get_object_or_404(Post, id=request.POST.get('post_id'))
-        #     print(p)
-        #     print(request.user.username)
-        #     like = Likes.objects.filter(user=request.user, post=p)
-        #     print(like.count())
-        #     if like.count() > 0:
-        #         p.is_liked = True
-        #         p.save()
-        #         # like.delete()
-        #     else:
-        #         p.likes_set.create(user=request.user)
         return render(request, 'tweets/index.html', {
             'recent_tweets': recent_tweets,
             'is_liked': is_liked,
-            'zipped': zip(is_liked, recent_tweets)
+            'zipped': zip(is_liked, recent_tweets),
+            'show_like': True
         })
 
 
@@ -149,6 +138,7 @@ def comment_view(request, post_id):
 def profile_view(request, username):
     personal_tweets = Post.objects.filter(profile__user__username=username)
 
-    return render(request, 'tweets/profile.html', {'tweets': personal_tweets})
-
-
+    return render(request, 'tweets/profile.html', {
+        'tweets': personal_tweets,
+        'show_like': False
+    })

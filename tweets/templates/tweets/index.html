@@ -56,7 +56,7 @@
         </div>
 
         {% for l, t in zipped %}
-            {% include 'tweets/tweet_template.html' with liked=l tweet=t %}
+            {% include 'tweets/tweet_template.html' with liked=l tweet=t show_like=show_like %}
             <hr class="my-2">
         {% endfor %}
     {% else %}
