@@ -52,8 +52,8 @@
         </div>
 
         {% for l, t in zipped %}
-            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
             {% include 'tweets/tweet_template.html' with liked=l tweet=t show_like=show_like %}
+            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
         {% endfor %}
     {% else %}
         <div class="container   col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
