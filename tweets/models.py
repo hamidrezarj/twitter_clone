@@ -6,7 +6,7 @@ from datetime import timezone
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    following = models.ManyToManyField('self', related_name='following', blank=True)
+    following = models.ManyToManyField(User, related_name='following', blank=True)
     profile_img = models.ImageField(upload_to='avatars', blank=True)
 
     def __str__(self):
@@ -24,7 +24,7 @@ class Post(models.Model):
         return self.content
 
     class Meta:
-        ordering = ('-pub_date', )
+        ordering = ('-pub_date',)
 
 
 class Comment(models.Model):
@@ -37,7 +37,7 @@ class Comment(models.Model):
         return self.profile.user.username
 
     class Meta:
-        ordering = ('-pub_date', )
+        ordering = ('-pub_date',)
 
 
 class Likes(models.Model):
