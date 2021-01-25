@@ -3,6 +3,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'tweets/index.css' %}">
+    <link rel="stylesheet" href="{% static 'tweets/profile.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -65,27 +66,30 @@
                     </div>
                     {#                    IMPORTANT: bottom div was made for 2 buttons!!#}
                     <div class="align-self-center">
-                        <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
-                            <button class="btn btn-info inline" id="editTrigger" data-toggle="modal"
-                                    data-target="#editModal">
-                                Edit Profile
-                            </button>
-                        </div>
-                        {#                    IF ON ANOTHER USER PROFILE ^THIS HAS TO BE "FOLLOW/UNFOLLOW" BUTTON#}
-                        <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
-                            <button class="btn btn-info inline" id="editTrigger" data-toggle="modal"
-                                    data-target="#editModal">
-                                FOLLOW
-                            </button>
-                        </div>
+                        {% if request.user.username == user_profile.user.username %}
+                            <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
+                                <button class="btn btn-info inline" id="editTrigger" data-toggle="modal"
+                                        data-target="#editModal">
+                                    Edit Profile
+                                </button>
+                            </div>
+                        {% else %}
+                            {#                    IF ON ANOTHER USER PROFILE ^THIS HAS TO BE "FOLLOW/UNFOLLOW" BUTTON#}
+                            <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
+                                <button class="btn btn-info inline" id="editTrigger" data-toggle="modal"
+                                        data-target="#editModal">
+                                    FOLLOW
+                                </button>
+                            </div>
+                        {% endif %}
                         {#                    ^THIS IS JUST FOR FUNCTIONALITY TEST OF FOLLOW FOR NOW#}
                     </div>
                 </div>
                 <div class="container align-bottom">
                     {#                    <b>{{profile_name}}</b>#}
                     {#                    <p>{{profile_joined_date}}</p>#}
-                    <b>UserName</b>
-                    <p>yyyy/MM/dd</p>
+                    <b>{{ user_profile }}</b>
+                    <p>Joined <span id="account-date"> {{ user_profile.user.date_joined|date:"F Y" }}</span></p>
 
                 </div>
             </div>

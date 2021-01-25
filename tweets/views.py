@@ -137,8 +137,11 @@ def comment_view(request, post_id):
 
 def profile_view(request, username):
     personal_tweets = Post.objects.filter(profile__user__username=username)
+    user = User.objects.get(username=username)
+    profile = get_object_or_404(Profile, user=user)
 
     return render(request, 'tweets/profile.html', {
         'tweets': personal_tweets,
+        'user_profile': profile,
         'show_like': False
     })
