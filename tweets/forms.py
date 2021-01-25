@@ -11,3 +11,11 @@ class LoginForm(forms.Form):
         if not "gmail.com" in email:
             raise forms.ValidationError("Email must be gmail.")
         return email
+
+
+class EditForm(forms.Form):
+    profile_img = forms.ImageField()
+    username = forms.CharField(required=False)
+
+    def clean_username(self):
+        pass

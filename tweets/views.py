@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from operator import attrgetter
+from .forms import EditForm
 
 
 # Create your views here.
@@ -163,6 +164,7 @@ def profile_view(request, username):
         'user_profile': profile,
         'show_like': False,
         'is_followed': is_followed,
+        'form': EditForm()
     })
 
 
@@ -185,3 +187,30 @@ def toggle_follow_view(request, username):
         'updated': updated
     }
     return JsonResponse(data)
+
+
+def edit_profile_view(request, username):
+    print(request.POST, request.FILES)
+    # chosen_image = request.POST.get('image_url', None)
+    # print('image: ', chosen_image)
+
+    # update_profile = get_object_or_404(Profile, user__username=username)
+    # update_profile.profile_img = chosen_image
+    # update_profile.save()
+
+    if request.method == "POST":
+        form = EditForm(request.POST, request.FILES)
+        image_saved = False
+        if form.is_valid():
+            update_profile = get_object_or_404(Profile, user__username=username)
+            update_profile.profile_img = form.cleaned_data['profile_img']
+            update_profile.save()
+            image_saved = True
+
+        # if image_saved:
+        #     return HttpResponseRedirect(reverse('tweets:profile', args=(request.user.username,)))
+
+    # print(request.POST)
+    return JsonResponse({
+        'image_saved': image_saved
+    })
