@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container col-8 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block px-1 border-left border-right border-tweeter">
         <form action="{% url 'tweets:comment' post_id %}" method="post">
             {% csrf_token %}
             <input type="text" placeholder="Write Your Comment Here" name="content" class="form-control">
@@ -12,7 +12,7 @@
         <hr class="my-4">
         {% if tweet.comment_set %}
             {% for c in tweet.comment_set.all %}
-                <p><b>{{ c }}</b> says: {{ c.content }}</p>
+                <p class="text"><b>{{ c }}</b> says: {{ c.content }}</p>
             {% endfor %}
         {% endif %}
 
