@@ -24,7 +24,7 @@ class Post(models.Model):
         return self.content
 
     class Meta:
-        ordering = ('-pub_date', )
+        ordering = ('-pub_date',)
 
 
 class Comment(models.Model):
@@ -37,7 +37,7 @@ class Comment(models.Model):
         return self.profile.user.username
 
     class Meta:
-        ordering = ('-pub_date', )
+        ordering = ('-pub_date',)
 
 
 class Likes(models.Model):

@@ -5,12 +5,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from operator import attrgetter
 
 
 # Create your views here.
 @login_required(login_url='/login/')
 def index(request):
-    user_profile = get_object_or_404(Profile, user=request.user)
+    current_user = get_object_or_404(Profile, user=request.user)
 
     btn_text = request.GET.get('btn_text', None)
     print('button text: ', btn_text)
@@ -21,12 +22,12 @@ def index(request):
 
         if btn_text == 'Dislike':
             # then add to number of likes
-            if not liked_tweet.likes_set.filter(profile=user_profile).exists():
-                liked_tweet.likes_set.create(profile=user_profile)
+            if not liked_tweet.likes_set.filter(profile=current_user).exists():
+                liked_tweet.likes_set.create(profile=current_user)
                 liked_tweet.save()
 
         else:
-            Likes.objects.get(profile=user_profile, post=liked_tweet).delete()
+            Likes.objects.get(profile=current_user, post=liked_tweet).delete()
 
         # context = dict()
         # context['is_liked'] = Tracklike.objects.filter(post=liked_tweet, user=request.user).exists()
@@ -38,10 +39,18 @@ def index(request):
         return JsonResponse(data)
 
     else:
-        recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
+        recent_tweets = []
+        following_list = current_user.following.all()
+        for f in following_list:
+            temp = get_object_or_404(Profile, user=f)
+            recent_tweets.extend(temp.post_set.all())
+
+        recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
+
+        # recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
         is_liked = []
         for i, tweet in enumerate(recent_tweets):
-            if tweet.likes_set.filter(profile=user_profile):
+            if tweet.likes_set.filter(profile=current_user):
                 is_liked.append(True)
             else:
                 is_liked.append(False)
@@ -98,7 +107,8 @@ def register_view(request):
             password2 = request.POST.get('password2')
             if password == password2:
                 new_user = User.objects.create_user(username=username, email=email, password=password)
-                Profile.objects.create(user=new_user)
+                profile = Profile.objects.create(user=new_user)
+                profile.following.add(new_user)
                 print(new_user)
                 return redirect('/login')
             else:
@@ -143,11 +153,35 @@ def comment_view(request, post_id):
 
 def profile_view(request, username):
     personal_tweets = Post.objects.filter(profile__user__username=username)
-    user = User.objects.get(username=username)
-    profile = get_object_or_404(Profile, user=user)
+    user_profile = User.objects.get(username=username)
+    profile = get_object_or_404(Profile, user=user_profile)
+    logged_in_user = get_object_or_404(Profile, user=request.user)
+    is_followed = logged_in_user.following.filter(username=username).exists()
 
     return render(request, 'tweets/profile.html', {
         'tweets': personal_tweets,
         'user_profile': profile,
-        'show_like': False
+        'show_like': False,
+        'is_followed': is_followed,
     })
+
+
+def toggle_follow_view(request, username):
+    user_to_follow = get_object_or_404(User, username=username)
+    current_user = get_object_or_404(Profile, user=request.user)
+    followed = False
+    updated = False
+    if request.user.is_authenticated:
+        if user_to_follow in current_user.following.all():
+            followed = False
+            current_user.following.remove(user_to_follow)
+        else:
+            followed = True
+            current_user.following.add(user_to_follow)
+        updated = True
+
+    data = {
+        'followed': followed,
+        'updated': updated
+    }
+    return JsonResponse(data)
