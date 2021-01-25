@@ -1,28 +1,30 @@
-<div class="jumbotron mb-0 pt-1 px-0"
-     style="padding-bottom: 3%">
+<div class="tweet-box container mb-0 pt-2 px-0"
+     style="padding-bottom: 3%; background: none">
 
-    <div class="container col-3 col-sm-3 col-md-2 col-lg-1 d-inline-block pt-3"
+    <div class="text-center col-2 col-sm-2 col-md-1 col-lg-1 d-inline-block px-0 mt-3 mx-2"
          style="min-height: 100%; vertical-align:top">
         <a href="{% url 'tweets:profile' tweet.profile.user.username %}">
-            <img class="rounded float-left pfpSmol"
+            <img class="rounded pfpSmol"
                  src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
                  style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
         </a>
     </div>
-    <div class="container col-8 col-sm-8 col-md-9 col-lg-10 d-inline-block pr-0">
-        <div class="d-flex">
-            <b class="text-left pt-2"
+    <div class="col-8 col-sm-8 col-md-9 col-lg-10 d-inline-block pr-0">
+        <div class="d-flex align-items-center pt-3">
+            <b class="text text-left pr-2"
                style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
-            <p class="text-muted pt-2 offset-sm-1 offset-md-1 offset-lg-1">{{ tweet.pub_date|date:"M j, Y" }}</p>
-            <div class="d-flex justify-content-start mr-2 pt-2 offset-sm-1 offset-md-3 offset-lg-4">
+            <p class="text text-white-50 m-0">{{ tweet.pub_date|date:"M j, Y" }}</p>
+            <div class="justify-self-end float-right ml-auto">
                 <button class="btn btn-info inline">
                     Follow/Delete
                 </button>
             </div>
         </div>
         <div>
-            <p>{{ tweet.content }}</p>
-            <form action="{% url 'tweets:index' %}" method="post" class="flex-row"
+            <p class="text">{{ tweet.content }}</p>
+            <p class="text"><span id="like_cnt">{{ tweet.likes_set.count }}</span>
+                Like{{ tweet.likes_set.count|pluralize }}</p>
+            <form action="{% url 'tweets:index' %}" method="post" class="d-flex justify-content-around"
                   change-data-url="{% url 'tweets:index' %}">
 
                 <a class="btn btn-primary flex-row d-inline-block" style="border: 1px solid transparent;"
@@ -64,16 +66,14 @@
                         </button>
                     {% endif %}
                 {% endif %}
-                <p><span id="like_cnt">{{ tweet.likes_set.count }}</span>
-                    Like{{ tweet.likes_set.count|pluralize }}</p>
 
             </form>
 
 
-            <hr class="my-4">
+            <hr class="my-4" style="border: none">
             {% if tweet.comment_set %}
                 {% for c in tweet.comment_set.all %}
-                    <p><b>{{ c }}</b> says: {{ c.content }}</p>
+                    <p class="text"><b>{{ c }}</b> says: {{ c.content }}</p>
                 {% endfor %}
             {% endif %}
         </div>

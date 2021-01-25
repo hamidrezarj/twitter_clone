@@ -9,7 +9,7 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
-        <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block"
+        <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block px-1 border-left border-right border-tweeter"
              style="min-height: 100vh;">
 
             <!-- Modal -->
@@ -76,8 +76,7 @@
                         {% else %}
                             {#                    IF ON ANOTHER USER PROFILE ^THIS HAS TO BE "FOLLOW/UNFOLLOW" BUTTON#}
                             <div class="d-flex align-self-end ml-md-1 mr-2 mb-3 ml-sm-3">
-                                <button class="btn btn-info inline" id="editTrigger" data-toggle="modal"
-                                        data-target="#editModal">
+                                <button class="btn btn-info inline">
                                     FOLLOW
                                 </button>
                             </div>
