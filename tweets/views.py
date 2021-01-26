@@ -297,3 +297,7 @@ def like_unlike_view(request):
         'updated': updated,
     }
     return JsonResponse(data)
+
+
+def notification_view(request):
+    return render(request, 'tweets/notification.html', {})

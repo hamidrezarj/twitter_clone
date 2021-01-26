@@ -5,6 +5,7 @@
 {% url 'tweets:logout' as logout_url %}
 {% url 'tweets:post' as post_url %}
 {% url 'tweets:profile' user.username as profile_url %}
+{% url 'tweets:notification' as notification_url %}
 
 {% load static %}
 {% block styles %}
@@ -51,8 +52,8 @@
 
                     {% if request.user.is_authenticated %}
 
-                        <li class="nav-item {% if request.path == user_url %} active{% endif %}">
-                            <a class="nav-link" href="{{ user_url }}">Your Blog</a>
+                        <li class="nav-item {% if request.path == notification_url %} active{% endif %}">
+                            <a class="nav-link" href="{{ notification_url }}">Notifications</a>
                         </li>
 
                         <li class="nav-item {% if request.path == logout_url %} active{% endif %}">
