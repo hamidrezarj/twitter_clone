@@ -9,6 +9,18 @@ from operator import attrgetter
 from .forms import EditForm
 
 
+def tweets_are_liked_by_user(recent_tweets, current_user):
+    is_liked = []
+    for i, tweet in enumerate(recent_tweets):
+        # if tweet.likes_set.filter(profile=current_user):
+        if current_user in tweet.likes.all():
+            is_liked.append(True)
+        else:
+            is_liked.append(False)
+
+    return is_liked
+
+
 # Create your views here.
 @login_required(login_url='/login/')
 def index(request):
@@ -50,19 +62,21 @@ def index(request):
     recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
 
     # recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
-    is_liked = []
-    for i, tweet in enumerate(recent_tweets):
-        # if tweet.likes_set.filter(profile=current_user):
-        if current_user in tweet.likes.all():
-            is_liked.append(True)
-        else:
-            is_liked.append(False)
+    # is_liked = []
+    # for i, tweet in enumerate(recent_tweets):
+    #     # if tweet.likes_set.filter(profile=current_user):
+    #     if current_user in tweet.likes.all():
+    #         is_liked.append(True)
+    #     else:
+    #         is_liked.append(False)
+    is_liked = tweets_are_liked_by_user(recent_tweets, current_user)
 
     return render(request, 'tweets/index.html', {
         'recent_tweets': recent_tweets,
         'is_liked': is_liked,
         'zipped': zip(is_liked, recent_tweets),
-        'show_like': True
+        'show_like': True,
+        'show_comment': True
     })
 
 
@@ -151,7 +165,8 @@ def comment_view(request, post_id):
     return render(request, 'tweets/tweet_with_replies.html', {
         'post_id': post_id,
         'tweet': tweet,
-        'show_like': True
+        'show_like': False,
+        'show_comment': False
     })
 
 
@@ -175,15 +190,18 @@ def profile_view(request, username):
     followings = profile.following.all().exclude(username=username)
     followers = get_user_followers(user_profile)
     print('followers: ', followers)
-
+    is_liked = tweets_are_liked_by_user(personal_tweets, logged_in_user)
     return render(request, 'tweets/profile.html', {
         'tweets': personal_tweets,
         'user_profile': profile,
-        'show_like': False,
+        'show_like': True,
+        'show_comment': True,
+        'is_liked': is_liked,
         'is_followed': is_followed,
         'followings': followings,
         'followers': followers,
-        'form': EditForm()
+        'form': EditForm(),
+        'zipped': zip(is_liked, personal_tweets)
     })
 
 
