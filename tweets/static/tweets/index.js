@@ -1,5 +1,29 @@
 console.log("Hello world.");
 
+function OnInput() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+}
+
+function validateTweetBox() {
+    var len = tweetBox.value.length;
+    return (tweetBox.minLength < len && tweetBox.maxLength > len);
+}
+
+function changeSubmit() {
+    if(!validateTweetBox()) {
+        tweetBoxSubmit.disabled = true;
+    }
+    else {
+        tweetBoxSubmit.disabled = false;
+    }
+}
+
+var tweetBox = document.getElementById('postBox');
+var tweetBoxSubmit = document.getElementById('postTweetBtn');
+tweetBox.addEventListener("input", OnInput, false);
+tweetBox.addEventListener("input", changeSubmit, false)
+
 var myModal = document.getElementById('exampleModal');
 var myInput = document.getElementById('exampleTrigger');
 var mycloseBTN = document.getElementById('closeBTN');

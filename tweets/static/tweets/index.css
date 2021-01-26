@@ -48,10 +48,28 @@
 
 @media (max-width: 992px) {
 
-    .pfpSmolOffset {
+    .thirdColumn > .pfpSmolOffset {
         width: 100% !important;
     }
 
+    .sideNav {
+        min-width: 80px;
+        max-width: 80px;
+        min-height: 100vh;
+        max-height: 100vh;
+        /*vertical-align:top;*/
+        /*position: fixed;*/
+    }
+
+    .navOffset {
+        margin-left: 83px;
+    }
+
+    .thirdColumn {
+        min-width: calc(40% - 90px);
+        max-width: calc(40% - 90px);
+        /*margin-left: calc(60% + 85px);*/
+    }
 }
 
 @media (min-width: 576px) {
@@ -180,4 +198,27 @@
     overflow-wrap: normal !important;
     word-wrap: normal !important;
     text-overflow: ellipsis;
+}
+
+.tweetTextArea, .tweetTextArea:focus {
+    border: none;
+    background: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    color: azure;
+    overflow: hidden;
+}
+
+/*.tweetTextArea:focus {*/
+/*    border: none;*/
+/*    background: none;*/
+/*    white-space: pre-wrap;*/
+/*    overflow-wrap: break-word;*/
+/*    color: azure;*/
+/*}*/
+
+.tweetSubmitBtn {
+    background-color: rgb(29, 161, 242);
+    color: white;
 }
