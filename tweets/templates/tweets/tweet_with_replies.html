@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container col-8 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block px-1 border-left border-right border-tweeter"
+    <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
          style="min-height: 100vh">
+
+        {% include 'tweets/tweet_template.html' with liked=tweet.likes tweet=tweet show_like=show_like %}
+
+        <div class="partBread lineBreak border-top border-bottom border-tweeter"></div>
+
         <form action="{% url 'tweets:comment' post_id %}" method="post">
             {% csrf_token %}
             <input type="text" placeholder="Write Your Comment Here" name="content" class="form-control">
@@ -13,7 +18,41 @@
         <hr class="my-4">
         {% if tweet.comment_set %}
             {% for c in tweet.comment_set.all %}
-                <p class="text"><b>{{ c }}</b> says: {{ c.content }}</p>
+                <div class="tweet-box container mb-0 pt-2 px-0 pb-1"
+                     style="background: none">
+
+                    <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                         style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch;">
+                        <a href="{% url 'tweets:profile' tweet.profile.user.username %}">
+                            {% if false %}
+                                <img class="rounded pfpSmol"
+                                        {#                                     src="{{ tweet.profile.profile_img.url }}"#}
+                                     style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
+                            {% else %}
+                                <img class="rounded pfpSmol"
+                                     src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                     style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
+                            {% endif %}
+
+                        </a>
+                    </div>
+                    <div class="pfpSmolOffset d-inline-block pr-0">
+                        <div class="d-flex align-items-center pt-3">
+                            <b class="text text-left pr-2"
+                               style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
+                            <p class="text text-white-50 m-0">{{ tweet.pub_date|date:"M j, Y" }}</p>
+                        </div>
+                        <div>
+
+                            <p class="text"><b>{{ c }}</b> says: {{ c.content }}</p>
+
+                            <hr class="my-4" style="border: none">
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
             {% endfor %}
         {% endif %}
 

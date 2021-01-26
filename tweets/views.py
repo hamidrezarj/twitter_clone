@@ -150,7 +150,8 @@ def comment_view(request, post_id):
     comments = tweet.comment_set.all()
     return render(request, 'tweets/tweet_with_replies.html', {
         'post_id': post_id,
-        'tweet': tweet
+        'tweet': tweet,
+        'show_like': True
     })
 
 
