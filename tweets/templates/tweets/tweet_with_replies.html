@@ -24,9 +24,9 @@
                     <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
                          style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch;">
                         <a href="{% url 'tweets:profile' tweet.profile.user.username %}">
-                            {% if false %}
+                            {% if c.profile.profile_img.url %}
                                 <img class="rounded pfpSmol"
-                                        {#                                     src="{{ tweet.profile.profile_img.url }}"#}
+                                     src="{{ c.profile.profile_img.url }}"
                                      style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
                             {% else %}
                                 <img class="rounded pfpSmol"

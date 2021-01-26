@@ -145,7 +145,7 @@ def comment_view(request, post_id):
         content = request.POST.get('content')
         user_profile = get_object_or_404(Profile, user=request.user)
         Comment.objects.create(post=tweet, content=content, profile=user_profile)
-        return redirect('/')
+        return HttpResponseRedirect(reverse('tweets:comment'))
 
     comments = tweet.comment_set.all()
     return render(request, 'tweets/tweet_with_replies.html', {
