@@ -151,6 +151,16 @@ def comment_view(request, post_id):
     })
 
 
+def get_user_followers(current_user):
+    followers = []
+    for profile in Profile.objects.all():
+        print('user {} has followings: {}'.format(profile, profile.following.all()))
+        if profile.user != current_user and current_user in profile.following.all():
+            followers.append(profile)
+
+    return followers
+
+
 def profile_view(request, username):
     personal_tweets = Post.objects.filter(profile__user__username=username)
     user_profile = User.objects.get(username=username)
@@ -158,11 +168,17 @@ def profile_view(request, username):
     logged_in_user = get_object_or_404(Profile, user=request.user)
     is_followed = logged_in_user.following.filter(username=username).exists()
 
+    followings = profile.following.all().exclude(username=username)
+    followers = get_user_followers(user_profile)
+    print('followers: ', followers)
+
     return render(request, 'tweets/profile.html', {
         'tweets': personal_tweets,
         'user_profile': profile,
         'show_like': False,
         'is_followed': is_followed,
+        'followings': followings,
+        'followers': followers
     })
 
 

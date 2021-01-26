@@ -111,17 +111,17 @@
 
                     <div class="container row">
                         <div class="col">
-                            <p class="text">Joined <span id="account-date"> {{ user_profile.user.date_joined|date:"F Y" }}</span></p>
+                            <p class="text">Joined <span
+                                    id="account-date"> {{ user_profile.user.date_joined|date:"F Y" }}</span></p>
                         </div>
                     </div>
                     <div class="container row">
                         <a href="#" class="col col-2 col-sm-6 col-md-4 col-lg-2">
-                            <span>10</span>
-                            <span>Followers</span>
+                            <span>{{ followers|length }} Follower{{ followers|length|pluralize }}</span>
+
                         </a>
                         <a href="#" class="col col-2 col-sm-6 col-md-4 col-lg-2">
-                            <span>2</span>
-                            <span>Following</span>
+                            <span>{{ followings.count }} Following{{ followings.count|pluralize }}</span>
                         </a>
                     </div>
 
