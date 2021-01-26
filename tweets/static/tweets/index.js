@@ -124,17 +124,17 @@ console.log(likeBtns);
 for (let btn of likeBtns) {
 
     btn.onclick = function (event) {
-        let btn_state = btn.getAttribute("next-state");
-        console.log("next-state: ",);
-        if (btn_state === "Like") {
-            // this.innerHTML = "Dislike";
-            btn.setAttribute("next-state", "Dislike");
-        } else {
-            // this.innerHTML = "Like";
-            btn.setAttribute("next-state", "Like");
-        }
 
-        // event.preventDefault();
+        // // console.log("next-state: ",);
+        // if (btn_state === "Like") {
+        //     // this.innerHTML = "Dislike";
+        //     btn.setAttribute("next-state", "Dislike");
+        // } else {
+        //     // this.innerHTML = "Like";
+        //     btn.setAttribute("next-state", "Like");
+        // }
+
+        event.preventDefault();
         let form = $(this).closest("form");
         console.log('hey there');
         console.log("form", form);
@@ -144,18 +144,60 @@ for (let btn of likeBtns) {
             url: form.attr("change-data-url"),
             data: {
                 'btn_value': $(this).val(),
-                'btn_text': btn.getAttribute("next-state"),
+                // 'btn_text': btn.getAttribute("next-state"),
             },
             dataType: 'json',
             success: function (data) {
-                if (data.has_changed) {
+
+                let btn_state = btn.getAttribute("next-state");
+                let query = 'like_cnt' + btn.value;
+                let likeCntElem = document.getElementById(query);
+
+                let likeQuery = 'like_img' + btn.value;
+                let like_img = document.getElementById(likeQuery);
+                console.log('like elem', like_img);
+
+                let dislikeQuery = 'dislike_img' + btn.value;
+                let dislike_img = document.getElementById(dislikeQuery);
+
+                if (data.is_liked) {
                     console.log("button value has been changed");
-                }
-                if (data.likes_count) {
-                    //    change num of likes shown to user
-                    form.next().children()[0].innerHTML = data.likes_count;
+                    // $('.like_img').addClass('d-none');
+                    // $('.dislike_img').removeClass('d-none');
+
+                    like_img.classList.add('d-none');
+                    dislike_img.classList.remove('d-none');
+
+                    updateLikeCount(likeCntElem, 1);
+
+                    // if (btn_state == "Like")
+                    //     btn.classList.add("invisible");
+                    // else
+                    //     btn.classList.remove("invisible");
+
+                } else {
+                    // $('.dislike_img').addClass('d-none');
+                    // $('.like_img').removeClass('d-none');
+
+                    dislike_img.classList.add('d-none');
+                    like_img.classList.remove('d-none');
+
+                    updateLikeCount(likeCntElem, -1);
+                    // if (btn_state == "Dislike")
+                    //     btn.classList.add("invisible");
+                    // else
+                    //     btn.classList.remove("invisible");
+
+
                 }
             }
         });
     }
+}
+
+function updateLikeCount(elem, addedValue) {
+    console.log(elem);
+    let newValue = parseInt(elem.innerHTML) + addedValue;
+    console.log('new value: ', newValue);
+    elem.innerHTML = newValue;
 }

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect, HttpResponse, get_object_or_404
 from django.utils import timezone
-from .models import Post, Comment, Likes, Profile
+from .models import Post, Comment, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -13,55 +13,57 @@ from .forms import EditForm
 @login_required(login_url='/login/')
 def index(request):
     current_user = get_object_or_404(Profile, user=request.user)
+    # print('current user: ', current_user)
 
-    btn_text = request.GET.get('btn_text', None)
-    print('button text: ', btn_text)
-    # handle like or dislike by AJAX
-    if btn_text:
-        btn_value = request.GET.get('btn_value', None)
-        liked_tweet = get_object_or_404(Post, id=int(btn_value))
+    # btn_text = request.GET.get('btn_text', None)
+    # print('button text: ', btn_text)
+    # # handle like or dislike by AJAX
+    # if btn_text:
+    #     btn_value = request.GET.get('btn_value', None)
+    #     liked_tweet = get_object_or_404(Post, id=int(btn_value))
+    #
+    #     if btn_text == 'Dislike':
+    #         # then add to number of likes
+    #         if not liked_tweet.likes_set.filter(profile=current_user).exists():
+    #             liked_tweet.likes_set.create(profile=current_user)
+    #             liked_tweet.save()
+    #
+    #     else:
+    #         Likes.objects.get(profile=current_user, post=liked_tweet).delete()
+    #
+    #     # context = dict()
+    #     # context['is_liked'] = Tracklike.objects.filter(post=liked_tweet, user=request.user).exists()
+    #
+    #     data = {
+    #         'has_changed': True,
+    #         'likes_count': liked_tweet.likes_set.count(),
+    #     }
+    #     return JsonResponse(data)
 
-        if btn_text == 'Dislike':
-            # then add to number of likes
-            if not liked_tweet.likes_set.filter(profile=current_user).exists():
-                liked_tweet.likes_set.create(profile=current_user)
-                liked_tweet.save()
+    # else:
+    recent_tweets = []
+    following_list = current_user.following.all()
+    for f in following_list:
+        temp = get_object_or_404(Profile, user=f)
+        recent_tweets.extend(temp.post_set.all())
 
+    recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
+
+    # recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
+    is_liked = []
+    for i, tweet in enumerate(recent_tweets):
+        # if tweet.likes_set.filter(profile=current_user):
+        if current_user in tweet.likes.all():
+            is_liked.append(True)
         else:
-            Likes.objects.get(profile=current_user, post=liked_tweet).delete()
+            is_liked.append(False)
 
-        # context = dict()
-        # context['is_liked'] = Tracklike.objects.filter(post=liked_tweet, user=request.user).exists()
-
-        data = {
-            'has_changed': True,
-            'likes_count': liked_tweet.likes_set.count(),
-        }
-        return JsonResponse(data)
-
-    else:
-        recent_tweets = []
-        following_list = current_user.following.all()
-        for f in following_list:
-            temp = get_object_or_404(Profile, user=f)
-            recent_tweets.extend(temp.post_set.all())
-
-        recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
-
-        # recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
-        is_liked = []
-        for i, tweet in enumerate(recent_tweets):
-            if tweet.likes_set.filter(profile=current_user):
-                is_liked.append(True)
-            else:
-                is_liked.append(False)
-
-        return render(request, 'tweets/index.html', {
-            'recent_tweets': recent_tweets,
-            'is_liked': is_liked,
-            'zipped': zip(is_liked, recent_tweets),
-            'show_like': True
-        })
+    return render(request, 'tweets/index.html', {
+        'recent_tweets': recent_tweets,
+        'is_liked': is_liked,
+        'zipped': zip(is_liked, recent_tweets),
+        'show_like': True
+    })
 
 
 def post(request):
@@ -239,3 +241,40 @@ def edit_profile_view(request, username):
             'updated': updated,
             'form_error': form.errors
         })
+
+
+def like_unlike_view(request):
+    btn_value = request.GET.get('btn_value', None)
+    to_be_liked_tweet = get_object_or_404(Post, id=int(btn_value))
+
+    if request.user.is_authenticated and btn_value:
+        current_user_profile = get_object_or_404(Profile, user=request.user)
+        is_liked = False
+        updated = False
+
+        if current_user_profile in to_be_liked_tweet.likes.all():
+            is_liked = False
+            to_be_liked_tweet.likes.remove(current_user_profile)
+        else:
+            is_liked = True
+            to_be_liked_tweet.likes.add(current_user_profile)
+
+        updated = True
+        # liked_user = to_be_liked_tweet.likes_set.filter(profile=current_user_profile)
+        # print('liked user: ', liked_user)
+        # if liked_user.exists():
+        #     is_liked = False
+        #     to_be_liked_tweet.likes_set.remove(liked_user[0])
+        #
+        # else:
+        #     is_liked = True
+        # l = Likes.objects.create(profile=current_user_profile)
+        # to_be_liked_tweet.likes_set.add(l)
+        # to_be_liked_tweet.likes_set.add(liked_user[0])
+
+    data = {
+
+        'is_liked': is_liked,
+        'updated': updated,
+    }
+    return JsonResponse(data)

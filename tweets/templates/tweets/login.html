@@ -11,6 +11,10 @@
             <input type="password" name="password" placeholder="Password" class="form-control">
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        <div>
+            <a href="{% url 'tweets:register' %}">Haven't signed up yet?</a>
+        </div>
     </div>
 
 
@@ -21,5 +25,7 @@
             <h4>{{ wrong_pass }}</h4>
         {% endif %}
     </div>
+
+
 
 {% endblock %}
