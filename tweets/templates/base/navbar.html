@@ -12,8 +12,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="sideNav">
-        <nav class="navbar nav-stacked flex-column navbar-expand navbar-dark bg-dark col-12 d-inline-block align-items-end"
+    <div class="sideNav ml-0 d-inline-block">
+        <nav class="navbar nav-stacked flex-column navbar-expand navbar-dark bg-dark col-12 d-inline-block"
              style="min-height: 100vh;">
             <a class="navbar-brand col-12" href="{% url 'tweets:index' %}">
                 {% if brand_name %}{{ brand_name }}{% else %}No brand name{% endif %}</a>
