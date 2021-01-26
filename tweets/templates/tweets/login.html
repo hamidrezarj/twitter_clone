@@ -14,12 +14,6 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <form action="{% url 'tweets:login' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Name" class="form-control">
-            <input type="password" name="password" placeholder="Password" class="form-control">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
 
         <div>
             <a href="{% url 'tweets:register' %}">Haven't signed up yet?</a>

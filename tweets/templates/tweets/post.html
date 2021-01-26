@@ -10,7 +10,7 @@
             <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
                  style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch;">
 
-                {% if request.user.profile.profile_img.url %}
+                {% if request.user.profile.profile_img %}
                     <img class="rounded pfpSmol"
                          src="{{ request.user.profile.profile_img.url }}"
                          style="border: 2px solid #51D2B7;"/>
