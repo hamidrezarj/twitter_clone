@@ -35,20 +35,7 @@ window.addEventListener('load', (event) => {
             $('#editModal').modal("hide");
         }
     }
-    // $('#exampleModal').on('hidden.bs.modal', function (e) {
-    //     console.log("hidden!")
-    // })
-});
 
-// window.addEventListener('load', (event) => {
-//     console.log("listener added")
-//     myModal.addEventListener('shown.bs.modal', function () {
-//       myInput.focus()
-//     })
-// });
-
-
-$(document).ready(function () {
     $("#edit_form").submit(function (event) {
         console.log("clicked on submit");
         event.preventDefault();
@@ -106,7 +93,24 @@ $(document).ready(function () {
 
     });
 
+
+    // $('#exampleModal').on('hidden.bs.modal', function (e) {
+    //     console.log("hidden!")
+    // })
 });
+
+// window.addEventListener('load', (event) => {
+//     console.log("listener added")
+//     myModal.addEventListener('shown.bs.modal', function () {
+//       myInput.focus()
+//     })
+// });
+
+
+// $(document).ready(function () {
+//
+//
+// });
 
 function renderError(errorContent, parentElem) {
     console.log(errorContent);
