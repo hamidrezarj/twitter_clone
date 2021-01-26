@@ -11,18 +11,19 @@ function validateTweetBox() {
 }
 
 function changeSubmit() {
-    if(!validateTweetBox()) {
+    if (!validateTweetBox()) {
         tweetBoxSubmit.disabled = true;
-    }
-    else {
+    } else {
         tweetBoxSubmit.disabled = false;
     }
 }
 
 var tweetBox = document.getElementById('postBox');
 var tweetBoxSubmit = document.getElementById('postTweetBtn');
-tweetBox.addEventListener("input", OnInput, false);
-tweetBox.addEventListener("input", changeSubmit, false)
+if (tweetBox) {
+    tweetBox.addEventListener("input", OnInput, false);
+    tweetBox.addEventListener("input", changeSubmit, false)
+}
 
 var myModal = document.getElementById('exampleModal');
 var myInput = document.getElementById('exampleTrigger');
@@ -49,7 +50,9 @@ window.addEventListener('load', (event) => {
         }
     }
 
+    console.log("window loaded!!!!!!!")
     if (editModalTrigger) {
+        console.log("inside")
         editModalTrigger.onclick = ev => {
             $('#editModal').modal("show");
         }
