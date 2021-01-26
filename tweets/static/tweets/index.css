@@ -171,12 +171,12 @@
     margin-left: auto;
     align-content: start;
     vertical-align: top;
+    white-space: nowrap;
     overflow: hidden;
 }
 
 .text.thirdColumnTxt {
-    white-space: nowrap;
-    width: 100px !important;
+    /*width: 100px !important;*/
     overflow-wrap: normal !important;
     word-wrap: normal !important;
     text-overflow: ellipsis;

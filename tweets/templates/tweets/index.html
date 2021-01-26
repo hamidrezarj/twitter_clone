@@ -23,8 +23,8 @@
             <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
         {% endfor %}
     {% else %}
-        <div class="container   col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
-            <div class="row">
+        <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
+             style="min-height: 100vh">
                 <div class="col">
                     <h3>You should first log in to see the content.</h3>
                     <a href="{% url 'tweets:login' %}">Log in now</a>
@@ -35,6 +35,13 @@
 </div>
 
     <div class="thirdColumn text-sm-center text-lg-left d-inline-block px-1 border mt-3">
+
+    <div class="container text-center align-items-center px-0 pt-2">
+        <h class="text">RECENT USERS</h>
+    </div>
+
+        <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
         <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
              style="min-height: 100%; vertical-align:top">
             <a href="{% url 'tweets:profile' user.username %}">

@@ -9,8 +9,8 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
-        <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block px-1 border-left border-right border-tweeter"
-             style="min-height: 100vh;">
+        <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
+             style="min-height: 100vh">
 
             <!-- Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -159,7 +159,8 @@
                 <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
             {% endfor %}
             {% else %}
-            <div class="container col-7 col-sm-8 col-md-9 col-lg-10 offset-4 offset-sm-4 offset-md-3 offset-lg-2 d-inline-block">
+            <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
+                 style="min-height: 100vh">
                 <div class="row">
                     <div class="col">
                         <h3>You should first log in to see the content.</h3>
