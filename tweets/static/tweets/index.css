@@ -226,3 +226,7 @@
 .custom-file-img {
     width: 60px !important;
 }
+
+.replyView>tweet-box:hover {
+    background-color: rgba(255, 255, 255, 1) !important;
+}

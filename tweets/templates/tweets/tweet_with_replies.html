@@ -8,14 +8,42 @@
 
         <div class="partBread lineBreak border-top border-bottom border-tweeter"></div>
 
-        <form action="{% url 'tweets:comment' post_id %}" method="post">
-            {% csrf_token %}
-            <input type="text" placeholder="Write Your Comment Here" name="content" class="form-control">
-            <!--<textarea name="" id="" cols="5" rows="5" class="form-control"></textarea>-->
-            <button class="btn btn-primary">Send</button>
-        </form>
+        <div class="container row mx-0 px-0 pb-1">
+            <div class="pb-3">
+                <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                     style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch;">
+                    <img class="rounded pfpSmol"
+                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                         style="border: 2px solid #51D2B7;"/>
+                    {#                ^PUT LOGGED IN USER PFP HERE!#}
+                </div>
+            </div>
+            <div class="col pt-3">
+                <form class="align-items-stretch" autocomplete="off" action="{% url 'tweets:comment' post_id %}" method="post">
+                    {% csrf_token %}
 
-        <hr class="my-4">
+                    <input type="text" class="form-control tweetTextArea mb-2" id="replyBox" maxlength="250" minlength="1"
+                              data-min-rows='1' rows='1' name="content" placeholder="Write Reply here..">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="col d-flex justify-content-end p-0">
+                            <button class="btn btn-primary tweetSubmitBtn" id="replyBtn">Reply</button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="my-2">
+            </div>
+        </div>
+{#        <form action="{% url 'tweets:comment' post_id %}" method="post">#}
+{#            {% csrf_token %}#}
+{#            <input type="text" placeholder="Write Your Comment Here" name="content" class="form-control">#}
+{#            <!--<textarea name="" id="" cols="5" rows="5" class="form-control"></textarea>-->#}
+{#            <button class="btn btn-primary">Send</button>#}
+{#        </form>#}
+
+        <hr class="my-1 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+        <hr class="my-1 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
         {% if tweet.comment_set %}
             {% for c in tweet.comment_set.all %}
                 <div class="tweet-box container mb-0 pt-2 px-0 pb-1"
@@ -40,11 +68,11 @@
                         <div class="d-flex align-items-center pt-3">
                             <b class="text text-left pr-2"
                                style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
-                            <p class="text text-white-50 m-0">{{ tweet.pub_date|date:"M j, Y" }}</p>
+                            <p class="text text-white-50 m-0">{{ c.pub_date|date:"M j, Y" }}</p>
                         </div>
                         <div>
 
-                            <p class="text"><b>{{ c }}</b> says: {{ c.content }}</p>
+                            <p class="text">says: {{ c.content }}</p>
 
                             <hr class="my-4" style="border: none">
                         </div>
