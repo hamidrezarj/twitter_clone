@@ -1,4 +1,5 @@
 from django import forms
+from .models import User
 
 
 class LoginForm(forms.Form):
@@ -14,8 +15,11 @@ class LoginForm(forms.Form):
 
 
 class EditForm(forms.Form):
-    profile_img = forms.ImageField()
+    profile_img = forms.ImageField(required=False)
     username = forms.CharField(required=False)
 
     def clean_username(self):
-        pass
+        new_username = self.cleaned_data['username']
+        if User.objects.filter(username=new_username).exists():
+            raise forms.ValidationError("Username is already taken!")
+        return new_username

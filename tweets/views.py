@@ -200,17 +200,26 @@ def edit_profile_view(request, username):
 
     if request.method == "POST":
         form = EditForm(request.POST, request.FILES)
-        image_saved = False
+        updated = False
         if form.is_valid():
+            print(form.cleaned_data)
+            user = get_object_or_404(User, username=username)
             update_profile = get_object_or_404(Profile, user__username=username)
-            update_profile.profile_img = form.cleaned_data['profile_img']
-            update_profile.save()
-            image_saved = True
+            if form.cleaned_data['username']:
+                user.username = form.cleaned_data['username']
+                user.save()
+
+            if form.cleaned_data['profile_img']:
+                update_profile.profile_img = form.cleaned_data['profile_img']
+                update_profile.save()
+
+            updated = True
 
         # if image_saved:
         #     return HttpResponseRedirect(reverse('tweets:profile', args=(request.user.username,)))
 
-    # print(request.POST)
-    return JsonResponse({
-        'image_saved': image_saved
-    })
+        # print(request.POST)
+        return JsonResponse({
+            'updated': updated,
+            'form_error': form.errors
+        })

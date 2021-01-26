@@ -56,46 +56,66 @@ $(document).ready(function () {
         let editModal = $('#editModal');
         let fileChooser = $("#pfpFile");
         let fileChosen = false;
-        if (fileChooser.val() != "") {
-            console.log("file chosen.");
-            console.log("image selected: ", fileChooser.val());
-            fileChosen = true;
-        } else {
-            // raise error
-            console.log("file not chosen.");
-            editModal.modal("hide");
-        }
+        // if (fileChooser.val() != "") {
+        //     console.log("file chosen.");
+        //     console.log("image selected: ", fileChooser.val());
+        //     fileChosen = true;
+        // } else {
+        //     // raise error
+        //     console.log("file not chosen.");
+        //     editModal.modal("hide");
+        // }
 
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        if (fileChosen) {
-            var formData = new FormData(this);
-            let url_ = $(this).attr("change-profile-url");
-            $.ajax({
-                url: url_,
-                type: "POST",
-                data: formData,
-                success: function (data) {
-                    // success
-                    if (data.image_saved) {
-                        console.log("image saved successfully");
-                        editModal.modal("hide");
+        // if (fileChosen) {
+        var formData = new FormData(this);
+        let url_ = $(this).attr("change-profile-url");
+        $.ajax({
+            url: url_,
+            type: "POST",
+            data: formData,
+            success: function (data) {
+                console.log('data: ', data);
+                // success
+                if (data.updated) {
+                    console.log("image saved successfully");
+                    editModal.modal("hide");
 
-                        //redirect to profile.html
+                    let newUsername = $("#usernameChange").val();
+                    //redirect to profile of updated user.
+                    if (newUsername != "")
+                        window.location.replace("/user/" + newUsername);
+                    else
                         location.reload();
-                        // window.location.replace(redirectPath);
-                    }
-                },
-                error: function (error) {
-                    console.log('error: ', error);
-                },
-                processData: false,
-                contentType: false
-            })
-        }
+                } else {
+                    //render error
+                    console.log(data.form_error);
+                    let errorContent = data.form_error.username[0];
+                    let parent = document.getElementById("edit-username");
+                    renderError(errorContent, parent)
+                }
+            },
+            error: function (error) {
+                console.log('error');
+                console.log('error: ', error);
+            },
+            processData: false,
+            contentType: false
+        })
+        // }
 
     });
 
 });
+
+function renderError(errorContent, parentElem) {
+    console.log(errorContent);
+    let errorElem = document.createElement('div');
+    errorElem.classList.add("invalid-feedback");
+    errorElem.classList.add("d-block");
+    errorElem.innerHTML += errorContent;
+    parentElem.appendChild(errorElem);
+}
 
 
 var likeBtns = document.getElementsByClassName("like_btn");
