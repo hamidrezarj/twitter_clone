@@ -44,6 +44,7 @@
     align-content: start;
     vertical-align: top;
     position: fixed;
+    background-color: rgba(29, 161, 242, 0.5) !important;
 }
 
 @media (max-width: 992px) {
@@ -227,6 +228,10 @@
     width: 60px !important;
 }
 
-.replyView>tweet-box:hover {
+.replyView > tweet-box:hover {
     background-color: rgba(255, 255, 255, 1) !important;
+}
+
+.modal-content {
+    background-color: rgba(172, 154, 242, 0.9) !important;
 }
