@@ -222,3 +222,7 @@
     background-color: rgb(29, 161, 242);
     color: white;
 }
+
+.custom-file-img {
+    width: 60px !important;
+}

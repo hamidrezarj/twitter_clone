@@ -23,7 +23,19 @@
                 <textarea class="form-control tweetTextArea mb-2" id="postBox" maxlength="250" minlength="1"
                           data-min-rows='1' rows='1' name="content" placeholder="Write Tweet here.."></textarea>
                 <div class="d-flex flex-row align-items-center">
-                    <button class="btn tweetSubmitBtn" id="postTweetBtn2" disabled>Send</button>
+
+                    <form class="col col-1 d-flex justify-content-start p-0">
+                        <div class="custom-file custom-file-img">
+                            <label class="btn btn-info" for="imgFile">img</label>
+                            <input type="file" accept="image/*" class="custom-file-input" id="imgFile">
+                        </div>
+                        <div class="custom-file custom-file-img">
+                            <label class="btn btn-info" for="otherFile">other</label>
+                            <input type="file" class="custom-file-input" id="otherFile">
+                        </div>
+{#                        <button class="btn tweetSubmitBtn" id="imageBTN">IMG</button>#}
+{#                        <button class="btn tweetSubmitBtn" id="otherBTN">other</button>#}
+                    </form>
                     <div class="col d-flex justify-content-end p-0">
                         <button class="btn tweetSubmitBtn" id="postTweetBtn" disabled>Tweet</button>
                     </div>
