@@ -59,8 +59,8 @@
 
                     <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
                          style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch;">
-                        <a href="{% url 'tweets:profile' tweet.profile.user.username %}">
-                            {% if c.profile.profile_img.url %}
+                        <a href="{% url 'tweets:profile' c.profile.user.username %}">
+                            {% if c.profile.profile_img %}
                                 <img class="rounded pfpSmol"
                                      src="{{ c.profile.profile_img.url }}"
                                      style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
@@ -75,7 +75,7 @@
                     <div class="pfpSmolOffset d-inline-block pr-0">
                         <div class="d-flex align-items-center pt-3">
                             <b class="text text-left pr-2"
-                               style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
+                               style="align-items: baseline; flex-direction: row;">{{ c }} </b>
                             <p class="text text-white-50 m-0">{{ c.pub_date|date:"M j, Y" }}</p>
                         </div>
                         <div>

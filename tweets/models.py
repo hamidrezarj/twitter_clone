@@ -19,6 +19,7 @@ class Post(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     media = models.FileField(upload_to='user_files/', blank=True)
     likes = models.ManyToManyField(Profile, related_name='likes', blank=True)
+    retweets = models.ManyToManyField(Profile, related_name='retweets', blank=True)
 
     def __str__(self):
         return self.content
@@ -38,7 +39,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-pub_date',)
-
 
 # class Likes(models.Model):
 #     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
