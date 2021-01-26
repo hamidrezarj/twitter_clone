@@ -18,7 +18,7 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     media = models.FileField(upload_to='user_files/', blank=True)
-    is_liked = False
+    likes = models.ManyToManyField(Profile, related_name='likes', blank=True)
 
     def __str__(self):
         return self.content
@@ -40,9 +40,9 @@ class Comment(models.Model):
         ordering = ('-pub_date',)
 
 
-class Likes(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.profile.user.username
+# class Likes(models.Model):
+#     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+#     post = models.ManyToManyField(Post)
+#
+#     def __str__(self):
+#         return self.profile.user.username
