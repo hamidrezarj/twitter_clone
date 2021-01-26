@@ -16,7 +16,7 @@
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content pfChangeModalContent">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title text" id="editModal">Change Profile</h5>
                             <button type="button" id="editCloseBTN" class="close" data-dismiss="modal"
@@ -98,7 +98,7 @@
                     {#                    IMPORTANT: bottom div was made for 2 buttons!!#}
                     <div class="align-self-center bt-5">
                         {% if request.user.username == user_profile.user.username %}
-                            <div class="d-flex align-self-end justify-content-center ml-md-1 mr-2 mb-3 ml-sm-3">
+                            <div class="d-flex align-self-end justify-content-center ml-md-1 ml-sm-3 mr-md-2 mr-sm-3 mb-3">
                                 <button class="btn btn-info d-inline" id="editTrigger" data-toggle="modal"
                                         data-target="#editModal">
                                     Edit Profile
@@ -106,7 +106,7 @@
                             </div>
                         {% else %}
                             {#                    IF ON ANOTHER USER PROFILE ^THIS HAS TO BE "FOLLOW/UNFOLLOW" BUTTON#}
-                            <div class="d-flex align-self-end justify-content-center ml-md-1 mr-2 mb-3 ml-sm-3">
+                            <div class="d-flex align-self-end justify-content-center ml-md-1 ml-sm-3 mr-md-2 mr-sm-3 mb-3">
 
                                 {% if is_followed %}
                                     <button class="btn btn-info d-inline" id="follow"
@@ -141,11 +141,11 @@
                         </div>
                     </div>
                     <div class="container row">
-                        <a href="#" class="col col-2 col-sm-6 col-md-4 col-lg-2">
+                        <a href="#" class="col col-8 col-sm-6 col-md-4 col-lg-3">
                             <span>{{ followers|length }} Follower{{ followers|length|pluralize }}</span>
 
                         </a>
-                        <a href="#" class="col col-2 col-sm-6 col-md-4 col-lg-2">
+                        <a href="#" class="col col-8 col-sm-6 col-md-4 col-lg-3">
                             <span>{{ followings.count }} Following{{ followings.count|pluralize }}</span>
                         </a>
                     </div>
