@@ -14,5 +14,6 @@ urlpatterns = [
     path('comment/<int:post_id>', views.comment_view, name='comment'),
 
     path('user/<username>/follow', views.toggle_follow_view, name='follow'),
+    path('user/<username>/edit_profile', views.edit_profile_view, name='edit_profile'),
 
 ]

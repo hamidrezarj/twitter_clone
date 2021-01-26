@@ -1,4 +1,5 @@
 from django import forms
+from .models import User
 
 
 class LoginForm(forms.Form):
@@ -11,3 +12,14 @@ class LoginForm(forms.Form):
         if not "gmail.com" in email:
             raise forms.ValidationError("Email must be gmail.")
         return email
+
+
+class EditForm(forms.Form):
+    profile_img = forms.ImageField(required=False)
+    username = forms.CharField(required=False)
+
+    def clean_username(self):
+        new_username = self.cleaned_data['username']
+        if User.objects.filter(username=new_username).exists():
+            raise forms.ValidationError("Username is already taken!")
+        return new_username
