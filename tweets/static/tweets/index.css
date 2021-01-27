@@ -263,3 +263,12 @@ html {
 .modal-content {
     background-color: rgba(25, 39, 52, 0.9) !important;
 }
+
+.retweet {
+    color: gray;
+}
+
+.retweeted {
+    color: white;
+    background-color: darkblue;
+}

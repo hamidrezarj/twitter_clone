@@ -4,7 +4,7 @@
     <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
          style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch;">
         <a href="{% url 'tweets:profile' tweet.profile.user.username %}">
-            {% if tweet.profile.profile_img%}
+            {% if tweet.profile.profile_img %}
                 <img class="rounded pfpSmol"
                      src="{{ tweet.profile.profile_img.url }}"
                      style="width: 60px; height: 60px; border: 2px solid #51D2B7;"/>
@@ -18,6 +18,11 @@
     </div>
     <div class="pfpSmolOffset d-inline-block pr-0">
         <div class="d-flex align-items-center pt-3">
+
+{#            {% if retweeted %}#}
+{#                <p class="retweet" id="retweet{{ tweet.id }}">You Retweeted</p>#}
+{#            {% endif %}#}
+
             <b class="text text-left pr-2"
                style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
             <p class="text text-white-50 m-0">{{ tweet.pub_date|date:"M j, Y" }}</p>
@@ -55,15 +60,45 @@
                 </a>
             {% endif %}
 
-            <a class="btn btn-info flex-row d-inline-block" style="border: 1px solid transparent;" role="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-chevron-double-up" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
-                    <path fill-rule="evenodd"
-                          d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-                </svg>
-            </a>
+            {% if retweeted %}
+                <button class="btn btn-info flex-row d-inline-block retweet_btns retweeted"
+                        style="border: 1px solid transparent;"
+                        change-data-url="{% url 'tweets:retweet_view' %}" value="{{ tweet.id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+                        <path fill-rule="evenodd"
+                              d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                    </svg>
+
+                </button>
+
+            {% else %}
+                <button class="btn btn-info flex-row d-inline-block retweet_btns" style="border: 1px solid transparent;"
+                        change-data-url="{% url 'tweets:retweet_view' %}" value="{{ tweet.id }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+                        <path fill-rule="evenodd"
+                              d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+                    </svg>
+
+                </button>
+            {% endif %}
+
+            {#            <a class="btn btn-info flex-row d-inline-block retweet_btns" style="border: 1px solid transparent;"#}
+            {#               change-data-url="{% url 'tweets:retweet_view' %}"#}
+            {#               role="button">#}
+            {#                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"#}
+            {#                     class="bi bi-chevron-double-up retweeted" viewBox="0 0 16 16">#}
+            {#                    <path fill-rule="evenodd"#}
+            {#                          d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>#}
+            {#                    <path fill-rule="evenodd"#}
+            {#                          d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>#}
+            {#                </svg>#}
+            {#            </a>#}
 
             {% csrf_token %}
 
