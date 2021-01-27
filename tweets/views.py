@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from operator import attrgetter
 from .forms import EditForm
+from django.contrib.postgres.search import SearchVector
 
 
 def suggest_users_to_follow(current_user):
@@ -41,9 +42,48 @@ def tweets_are_retweeted_by_user(recent_tweets, current_user):
 @login_required(login_url='/login/')
 def index(request):
     current_user = get_object_or_404(Profile, user=request.user)
+    following_list = current_user.following.all()
+
+    if request.method == "POST":
+        # print(request.POST)
+        # print(request.POST['search_field'])
+
+        search_text = request.POST['search_field']
+        searched_queryset = []
+        if search_text[0] == '@':
+            # search among users
+            searched_queryset = Post.objects.annotate(search=SearchVector('profile__user__username')).filter(
+                search=search_text)
+        else:
+            # search among content
+            searched_queryset = Post.objects.annotate(search=SearchVector('content')).filter(
+                search=search_text)
+
+        result_tweets = []
+        for p in searched_queryset:
+            for f in following_list:
+                temp = get_object_or_404(Profile, user=f)
+
+                if p in temp.post_set.all() or p in temp.retweets.all():
+                    result_tweets.append(p)
+
+        result_tweets = list(set(result_tweets))
+        result_tweets.sort(key=attrgetter('pub_date'), reverse=True)
+
+        is_liked = tweets_are_liked_by_user(result_tweets, current_user)
+        is_retweeted = tweets_are_retweeted_by_user(result_tweets, current_user)
+
+        return render(request, 'tweets/index.html', {
+            'recent_tweets': result_tweets,
+            'is_liked': is_liked,
+            'zipped': zip(is_retweeted, is_liked, result_tweets),
+            'show_like': True,
+            'show_comment': True
+        })
+
+        # exclude unrelated tweets
 
     recent_tweets = []
-    following_list = current_user.following.all()
     for f in following_list:
         temp = get_object_or_404(Profile, user=f)
         recent_tweets.extend(temp.post_set.all())
@@ -51,14 +91,7 @@ def index(request):
 
     recent_tweets = list(set(recent_tweets))
     recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
-    # recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
-    # is_liked = []
-    # for i, tweet in enumerate(recent_tweets):
-    #     # if tweet.likes_set.filter(profile=current_user):
-    #     if current_user in tweet.likes.all():
-    #         is_liked.append(True)
-    #     else:
-    #         is_liked.append(False)
+
     is_liked = tweets_are_liked_by_user(recent_tweets, current_user)
     is_retweeted = tweets_are_retweeted_by_user(recent_tweets, current_user)
 

@@ -163,6 +163,19 @@ window.addEventListener('load', (event) => {
 
     });
 
+    //search bar
+    $("#searchTxt1").change(function (event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        console.log('ENTER KEY');
+        if ($(this).val() != "") {
+            $(this).closest('form').submit();
+        }
+
+    }
+});
+
+
 
     // $('#exampleModal').on('hidden.bs.modal', function (e) {
     //     console.log("hidden!")

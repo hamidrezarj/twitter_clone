@@ -37,9 +37,11 @@
     <div class="thirdColumn d-inline-block mt-3 px-1">
         {#      SEARCH BOX WILL BE HERE LATER!!(ALREADY TESTED)#}
         <div class="searchContainer mb-3">
-            <form>
-{#                <label for="searchTxt1 hidden">search Text</label>#}
-                <input type="text" class="searchTxt form-control" id="searchTxt1" placeholder="Search...">
+            <form method="post">
+                {% csrf_token %}
+                {#                <label for="searchTxt1 hidden">search Text</label>#}
+                <input type="text" name="search_field" class="searchTxt form-control" id="searchTxt1"
+                       placeholder="Search...">
             </form>
         </div>
         <div class="recommendationBox text-sm-center text-lg-left border">
