@@ -32,7 +32,7 @@
                                 {% csrf_token %}
                                 <div class="container mb-3">
                                     <div class="row text-center">
-                                        <div class="col">
+                                        <div class="col" id="pfpImgContainer">
                                             {% if user_profile.profile_img %}
                                                 <img src="{{ user_profile.profile_img.url }}"
                                                      class="rounded-circle" style="width: 120px"
@@ -47,8 +47,9 @@
                                         </div>
                                     </div>
                                     <div class="custom-file text-center">
-                                        {{ form.profile_img|attr:"id:pfpFile"|attr:"class:custom-file-input" }}
-                                        <label class="btn btn-info" for="pfpFile">Choose Image...</label>
+                                        {{ form.profile_img|attr:"id:pfpImgFile"|attr:"class:custom-file-input" }}
+{#                                        <input type="file" accept="image/*" class="text btn btn-info custom-file-input" id="pfpImgFile" for="pfpFile">Choose Image...</input>#}
+                                        <label class="btn btn-info" for="pfpImgFile">Choose Image...</label>
                                     </div>
                                 </div>
 
