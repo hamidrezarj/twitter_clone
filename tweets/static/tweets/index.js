@@ -52,7 +52,7 @@ let loadFilePfp = function (event) {
     let output = document.getElementById("pfpImgContainer");
     let src = URL.createObjectURL(pfpfile.files[0]);
     output.innerHTML = "";
-    console.log("inside baby")
+    console.log("inside baby");
 
     var e = document.createElement('div');
     e.innerHTML = "<img src='" + src + "' id='pfpImgContainer2' alt='Image' class='tweetImg rounded-circle'></div>";
@@ -217,10 +217,39 @@ window.addEventListener('load', (event) => {
         }
     });
 
+    $("#likesTrigger").click(function (event) {
+        event.preventDefault();
 
-    // $('#exampleModal').on('hidden.bs.modal', function (e) {
-    //     console.log("hidden!")
-    // })
+        let url_ = $(this).attr("show-data-url");
+
+        $.ajax({
+            url: url_,
+            data: {},
+            success: function (data) {
+                // var likes = JSON.parse(data.likes);
+                // console.log(likes);
+                // for (let like_obj of likes) {
+                //     console.log(like_obj.fields.profile_img);
+                //     console.log(like_obj.fields.user);
+                //     console.log(like_obj.fields);
+                // }
+
+                var like_usernames = data.like_usernames;
+                var profile_images = data.profile_images;
+                console.log(like_usernames);
+                console.log(profile_images);
+
+                // please create elements for rendering here.
+
+
+                // var likes = JSON.parse('{{data|safe}}');
+                // console.log(likes);
+            }, error: function () {
+
+            }
+        })
+
+    })
 });
 
 // window.addEventListener('load', (event) => {
@@ -376,3 +405,4 @@ for (let del_btn of deleted_btns) {
         })
     }
 }
+

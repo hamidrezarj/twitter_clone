@@ -6,6 +6,7 @@ app_name = 'tweets'
 urlpatterns = [
     path('', views.index, name='index'),
     path('delete_tweet/<int:post_id>/', views.delete_tweet, name='delete_tweet'),
+    path('show_likes/<int:post_id>/', views.show_likes, name='show_likes'),
     path('ajax/like/', views.like_unlike_view, name='like_view'),
     path('ajax/retweet/', views.retweet_view, name='retweet_view'),
     path('register/', views.register_view, name='register'),

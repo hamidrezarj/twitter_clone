@@ -168,7 +168,8 @@
                         Likes</p>
                 {% else %}
                     <a class="text m-0 p-0 d-inline-block" style="color: azure" href="#" id="likesTrigger"
-                       data-toggle="modal" data-target="#likesModal">
+                       data-toggle="modal" data-target="#likesModal"
+                       show-data-url="{% url 'tweets:show_likes' tweet.id %}">
                         <span id="like_cnt{{ tweet.id }}">{{ tweet.likes.count }}</span>
                         Likes</a>
                 {% endif %}

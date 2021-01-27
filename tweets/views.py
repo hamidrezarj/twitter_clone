@@ -9,6 +9,7 @@ from operator import attrgetter
 from .forms import EditForm
 from django.contrib.postgres.search import SearchVector
 from django.contrib.postgres.search import SearchQuery
+from django.core import serializers
 
 
 def suggest_users_to_follow(current_user):
@@ -387,4 +388,25 @@ def delete_tweet(request, post_id):
 
     return JsonResponse({
         'error': error
+    })
+
+
+def show_likes(request, post_id):
+    tweet = get_object_or_404(Post, id=post_id)
+    likes = tweet.likes.all()
+    likers_usernames = []
+    profile_imgs = []
+    for l in likes:
+        likers_usernames.append(l.user.username)
+        if l.profile_img:
+            profile_imgs.append(l.profile_img.url)
+        else:
+            profile_imgs.append(0)
+
+    print('profile imgs', profile_imgs)
+
+    # json_likes = serializers.serialize('json', likes)
+    return JsonResponse({
+        'like_usernames': likers_usernames,
+        'profile_images': profile_imgs
     })
