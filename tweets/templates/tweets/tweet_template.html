@@ -59,8 +59,13 @@
             <hr class="my-2" style="border: none">
 
             <div class="tweetImgContainer col-12 p-0 mb-4 d-flex">
-                <img src="https://cdn.discordapp.com/attachments/570604241341775873/762644459543592960/LULUhmmm.png?format=jpg&name=small"
-                     alt="Image" class="tweetImg">
+                {% if tweet.media %}
+                    <img src="{{ tweet.media.url }}?format=jpg&name=small"
+                         alt="Image" class="tweetImg">
+                {% else %}
+                    <img src="https://cdn.discordapp.com/attachments/570604241341775873/762644459543592960/LULUhmmm.png?format=jpg&name=small"
+                         alt="Image" class="tweetImg">
+                {% endif %}
             </div>
             {#            {% if tweet.comment_set %}#}
             {#                {% for c in tweet.comment_set.all %}#}

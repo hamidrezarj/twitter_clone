@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from operator import attrgetter
-from .forms import EditForm
+from .forms import EditForm, PostForm
 from django.contrib.postgres.search import SearchVector
 from django.contrib.postgres.search import SearchQuery
 from django.core import serializers
@@ -90,7 +90,8 @@ def index(request):
             'zipped': zip(is_retweeted, is_liked, result_tweets),
             'show_like': True,
             'show_comment': True,
-            'users_to_follow': suggest_users_to_follow(current_user)
+            'users_to_follow': suggest_users_to_follow(current_user),
+            'form': PostForm()
         })
 
         # exclude unrelated tweets
@@ -117,18 +118,29 @@ def index(request):
         'zipped': zip(is_retweeted, is_liked, recent_tweets),
         'show_like': True,
         'show_comment': True,
-        'users_to_follow': suggest_users_to_follow(current_user)
+        'users_to_follow': suggest_users_to_follow(current_user),
+        'form': PostForm()
     })
 
 
 def post(request):
+    # form = PostForm()
     if request.method == 'POST':
-        user_profile = get_object_or_404(Profile, user=request.user)
-        Post.objects.create(profile=user_profile, content=request.POST['content'], pub_date=timezone.now())
-        return HttpResponseRedirect(reverse('tweets:index'))
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = get_object_or_404(Profile, user=request.user)
+            p = Post.objects.create(profile=user_profile, content=form.cleaned_data['content'], pub_date=timezone.now())
+            if form.cleaned_data['media']:
+                p.media = form.cleaned_data['media']
+                p.save()
+
+            return HttpResponseRedirect(reverse('tweets:index'))
 
     elif request.method == 'GET':
-        return render(request, 'tweets/post.html', {})
+        print('im in post.viw')
+        return render(request, 'tweets/post.html', {
+            'form': PostForm()
+        })
 
 
 def login_view(request):

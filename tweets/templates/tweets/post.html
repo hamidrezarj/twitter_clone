@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load widget_tweaks %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'tweets/index.css' %}">
 {% endblock %}
@@ -24,32 +24,35 @@
         </div>
         <div class="col pt-3">
             <form class="align-items-stretch" autocomplete="off" action="{% url 'tweets:post' %}"
-                  method="post">
+                  method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <textarea class="form-control tweetTextArea mb-2" id="postBox" maxlength="250" minlength="1"
-                          data-min-rows='1' rows='1' name="content" placeholder="Write Tweet here.."></textarea>
+                {#                <textarea class="form-control tweetTextArea mb-2" id="postBox" maxlength="250" minlength="1"#}
+                {#                          data-min-rows='1' rows='1' name="content" placeholder="Write Tweet here.."></textarea>#}
+                {{ form.content|attr:"class:form-control tweetTextArea mb-2"|attr:"class:tweetTextArea"| attr:"class:mb-2"|attr:"id:postBox"|attr:"maxlength:250"|attr:"minlength:1"|attr:"data-min-rows:1"|attr:"rows:1"|attr:"placeholder:Write Tweet here.." }}
+                {#                {{ form.username|attr:"id:usernameChange"|attr:"class:form-control"|attr:"placeholder:New Username" }}#}
 
                 <hr class="my-2" style="border: none">
 
                 <div class="tweetImgContainer col-12 p-0 mb-4 d-flex" id="uploadImgContainer">
-{#                    <img src="https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_960_720.jpg?format=jpg&name=small" alt="Image" class="tweetImg">#}
+                    {#                    <img src="https://cdn.pixabay.com/photo/2018/01/12/10/19/fantasy-3077928_960_720.jpg?format=jpg&name=small" alt="Image" class="tweetImg">#}
                 </div>
 
                 <div class="d-flex flex-row align-items-center">
 
-                    <form class="col col-1 d-flex justify-content-start p-0">
-                        <div class="custom-file custom-file-img">
-                            <label class="btn btn-info" for="imgFile">img</label>
-                            <input type="file" accept="image/*" class="custom-file-input" id="imgFile">
-                        </div>
-                        <div class="custom-file custom-file-img">
-                            <label class="btn btn-info" for="otherFile">other</label>
-                            <input type="file" class="custom-file-input" id="otherFile">
-                        </div>
-                        {#                        <button class="btn tweetSubmitBtn" id="imageBTN">IMG</button>#}
-                        {#                        <button class="btn tweetSubmitBtn" id="otherBTN">other</button>#}
-                    </form>
+                    {#                    <form class="col col-1 d-flex justify-content-start p-0">#}
+                    <div class="custom-file custom-file-img">
+                        <label class="btn btn-info" for="imgFile">img</label>
+                        {{ form.media|attr:'class:custom-file-input'|attr:'id:imgFile' }}
+{#                        <input type="file" name="post_image" accept="image/*" class="custom-file-input" id="imgFile">#}
+                    </div>
+                    <div class="custom-file custom-file-img">
+                        <label class="btn btn-info" for="otherFile">other</label>
+                        <input type="file" class="custom-file-input" id="otherFile">
+                    </div>
+                    {#                        <button class="btn tweetSubmitBtn" id="imageBTN">IMG</button>#}
+                    {#                        <button class="btn tweetSubmitBtn" id="otherBTN">other</button>#}
+                    {#                    </form>#}
                     <div class="col d-flex justify-content-end p-0">
                         <button class="btn tweetSubmitBtn" id="postTweetBtn" disabled>Tweet</button>
                     </div>
@@ -64,5 +67,5 @@
 {% endblock %}
 
 {% block script %}
-{#    <script src="{% static 'tweets/index.js' %}"></script>#}
+    {#    <script src="{% static 'tweets/index.js' %}"></script>#}
 {% endblock %}

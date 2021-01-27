@@ -23,3 +23,8 @@ class EditForm(forms.Form):
         if User.objects.filter(username=new_username).exists():
             raise forms.ValidationError("Username is already taken!")
         return new_username
+
+
+class PostForm(forms.Form):
+    content = forms.CharField(widget=forms.Textarea)
+    media = forms.ImageField(required=False)
