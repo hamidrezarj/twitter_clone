@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from operator import attrgetter
 from .forms import EditForm
 from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchQuery
 
 
 def suggest_users_to_follow(current_user):
@@ -56,8 +57,11 @@ def index(request):
                 search=search_text)
         else:
             # search among content
+            query = SearchQuery(search_text, search_type='phrase')
             searched_queryset = Post.objects.annotate(search=SearchVector('content')).filter(
-                search=search_text)
+                search=query)
+
+        print('search query: ', searched_queryset)
 
         result_tweets = []
         for p in searched_queryset:
@@ -89,7 +93,11 @@ def index(request):
         recent_tweets.extend(temp.post_set.all())
         recent_tweets.extend(temp.retweets.all().exclude(profile=current_user))
 
-    recent_tweets = list(set(recent_tweets))
+    # recent_tweets = list(set(recent_tweets))
+    recent_tweets = list(dict.fromkeys(recent_tweets))
+
+    # list(dict.fromkeys(mylist))
+
     recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
 
     is_liked = tweets_are_liked_by_user(recent_tweets, current_user)
