@@ -239,7 +239,65 @@ window.addEventListener('load', (event) => {
                 console.log(like_usernames);
                 console.log(profile_images);
 
-                // please create elements for rendering here.
+                var like_container = document.getElementById('likeListContainer');
+
+                let output = document.getElementById("likeListContainer");
+                output.innerHTML = "";
+                console.log("inside baby")
+
+
+                for (let i = 0; i < like_usernames.length; i++) {
+                    console.log("i: " +i)
+                        // <hr class='my-2 lineBreak' style='width: 100%; background-color: white; margin:-1px 0;'>
+                        //
+                        // <div class='pfpSmolContainer d-inline-block px-0 mt-3 mx-2'
+                        //      style='min-height: 100%; vertical-align:top'>
+                        //     <a href='{% url 'tweets:profile' user.username %}'>
+                        //         <img class='rounded pfpSmol'
+                        //              src='https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg'
+                        //              style='border: 2px solid #51D2B7;'/>
+                        //
+                        //     </a>
+                        // </div>
+                        // <div class='pfpPopupOffset d-inline-block px-0 mr-0 mb-2'>
+                        //     <div class='align-items-center pt-3'>
+                        //         <b class='text thirdColumnTxt'>THIS USER IS FOLLOWING: USERNAME</b>
+                        //         <div class='justify-self-end ml-auto'>
+                        //             <button class='btn btn-info'>
+                        //                 Follow
+                        //             </button>
+                        //         </div>
+                        //     </div>
+                        // </div>
+
+
+                var e = document.createElement('div');
+                e.className += "d-inline-block";
+                e.innerHTML =
+                    "                        <hr class='my-2 lineBreak' style='width: 100%; background-color: white; margin:-1px 0;'>" +
+                    "                        <div class='pfpSmolContainer d-inline-block px-0 mt-3 mx-2'" +
+                    "                             style='min-height: 100%; vertical-align:top'>" +
+                    "                            <a href='{% url 'tweets:profile' " + like_usernames[i] + " %}'>" +
+                    "                                <img class='rounded pfpSmol' " +
+                    "                                     src='" + profile_images[i]  + "'" +
+                    "                                     style='border: 2px solid #51D2B7;'/>" +
+                    "                            </a>" +
+                    "                        </div>" +
+                console.log(e.innerHTML)
+                e.innerHTML +=
+                    "                        <div class='pfpPopupOffset d-inline-block px-0 mr-0 mb-2'>" +
+                    "                            <div class='align-items-center pt-3'>" +
+                    "                                <b class='text thirdColumnTxt'>" + like_usernames[i] +"</b>" +
+                    "                                <div class='justify-self-end ml-auto'>" +
+                    "                                    <button class='btn btn-info'>" +
+                    "                                        Follow" +
+                    "                                    </button>" +
+                    "                                </div>" +
+                    "                            </div>" +
+                    "                        </div>"
+                output.appendChild(e);
+
+                }
 
 
                 // var likes = JSON.parse('{{data|safe}}');

@@ -297,6 +297,32 @@ html {
     background-color: rgba(29, 161, 242, 0.1) !important;
 }
 
+.bottomBtn {
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 50% !important;
+    background: none!important;
+    border: none!important;
+    /*border: rgb(56, 68, 77) !important;*/
+}
+
+.bottomBtn:hover {
+    color: rgb(29, 161, 242)!important;
+    background-color: rgba(29, 161, 242, 0.1) !important;
+}
+
+.like_btn {
+    color: rgb(224, 36, 94);
+    border-radius: 50% !important;
+    background: none!important;
+    border: none!important;
+    /*border: rgb(56, 68, 77) !important;*/
+}
+
+.like_btn:hover {
+    color: rgb(224, 36, 94)!important;
+    background-color: rgba(224, 36, 94, 0.1) !important;
+}
+
 .retweetTxt {
     height: 20px;
     font-size: 13px;
@@ -316,7 +342,7 @@ html {
 
 .retweeted {
     color: white;
-    background-color: darkblue;
+    color: rgb(29, 161, 242);
 }
 
 .searchContainer {
