@@ -49,7 +49,15 @@
 
 @media (max-width: 992px) {
 
-    .thirdColumn > .pfpSmolOffset {
+    .pfpThirdBoxOffset {
+        width: 100% !important;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .pfpThirdBoxOffset {
         width: 100% !important;
     }
 
@@ -184,17 +192,27 @@
     /*white-space: initial;*/
 }
 
+.pfpThirdBoxOffset {
+    width: calc(100% - 100px);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 .thirdColumn {
+    vertical-align: top;
+}
+
+.recommendationBox {
     border-radius: .5rem;
     border-color: rgb(56, 68, 77) !important;
     margin-left: auto;
     align-content: start;
-    vertical-align: top;
+    justify-content: center;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.text.thirdColumnTxt {
+.text.recommendationBox {
     /*width: 100px !important;*/
     overflow-wrap: normal !important;
     word-wrap: normal !important;

@@ -301,3 +301,11 @@ def like_unlike_view(request):
 
 def notification_view(request):
     return render(request, 'tweets/notification.html', {})
+
+
+def followers_view(request):
+    return render(request, 'tweets/followers.html', {})
+
+
+def following_view(request):
+    return render(request, 'tweets/following.html', {})

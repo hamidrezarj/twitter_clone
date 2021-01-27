@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('user/<username>/follow', views.toggle_follow_view, name='follow'),
     path('user/<username>/edit_profile', views.edit_profile_view, name='edit_profile'),
+    path('user/<username>/followers', views.followers_view, name='followers'),
+    path('user/<username>/following', views.following_view, name='following'),
     path('user/notification', views.notification_view, name='notification'),
 
 ]

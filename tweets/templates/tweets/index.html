@@ -34,58 +34,61 @@
     {% endif %}
 </div>
 
-    <div class="thirdColumn text-sm-center text-lg-left d-inline-block px-1 border mt-3">
+    <div class="thirdColumn d-inline-block mt-3 px-1">
+{#      SEARCH BOX WILL BE HERE LATER!!(ALREADY TESTED)#}
+        <div class="recommendationBox text-sm-center text-lg-left border">
 
-    <div class="container text-center align-items-center px-0 pt-2">
-        <h class="text">RECENT USERS</h>
-    </div>
+            <div class="container text-center align-items-center px-0 pt-2">
+                <h class="text">RECENT USERS</h>
+            </div>
 
-        <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 
-        <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-             style="min-height: 100%; vertical-align:top">
-            <a href="{% url 'tweets:profile' user.username %}">
-                <img class="rounded pfpSmol"
-                     src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                     style="border: 2px solid #51D2B7;"/>
+            <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                 style="min-height: 100%; vertical-align:top">
+                <a href="{% url 'tweets:profile' user.username %}">
+                    <img class="rounded pfpSmol"
+                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                         style="border: 2px solid #51D2B7;"/>
 
-            </a>
-        </div>
-        <div class="pfpSmolOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
-            <div class="align-items-center pt-3">
-                <b class="text thirdColumnTxt text-center">USERNAME </b>
-                <div class="justify-self-end ml-auto">
-                    <button class="btn btn-info">
-                        Follow
-                    </button>
+                </a>
+            </div>
+            <div class="pfpThirdBoxOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
+                <div class="align-items-center pt-3">
+                    <b class="text thirdColumnTxt text-center">USERNAME </b>
+                    <div class="justify-self-end ml-auto">
+                        <button class="btn btn-info">
+                            Follow
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 
-        <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-             style="min-height: 100%; vertical-align:top">
-            <a href="{% url 'tweets:profile' user.username %}">
-                <img class="rounded pfpSmol"
-                     src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                     style="border: 2px solid #51D2B7;"/>
+            <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                 style="min-height: 100%; vertical-align:top">
+                <a href="{% url 'tweets:profile' user.username %}">
+                    <img class="rounded pfpSmol"
+                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                         style="border: 2px solid #51D2B7;"/>
 
-            </a>
-        </div>
-        <div class="pfpSmolOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
-            <div class="align-items-center pt-3">
-                <b class="text thirdColumnTxt text-center">delete this!</b>
-                <div class="justify-self-end ml-auto">
-                    <button class="btn btn-info">
-                        Follow
-                    </button>
+                </a>
+            </div>
+            <div class="pfpThirdBoxOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
+                <div class="align-items-center pt-3">
+                    <b class="text thirdColumnTxt text-center">delete this!</b>
+                    <div class="justify-self-end ml-auto">
+                        <button class="btn btn-info">
+                            Follow
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
         </div>
-
-        <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
-
     </div>
 
     <!-- Modal -->
