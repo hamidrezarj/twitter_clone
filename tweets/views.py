@@ -12,7 +12,13 @@ from django.contrib.postgres.search import SearchQuery
 
 
 def suggest_users_to_follow(current_user):
-    pass
+    users_to_follow = []
+    for profile in Profile.objects.all():
+        if profile.user not in current_user.following.all() and profile.user.username != current_user.user.username:
+            users_to_follow.append(profile)
+
+    print('users to follow: ', users_to_follow)
+    return users_to_follow[: 5]
 
 
 def tweets_are_liked_by_user(recent_tweets, current_user):
@@ -57,7 +63,7 @@ def index(request):
                 search=search_text)
         else:
             # search among content
-            query = SearchQuery(search_text, search_type='phrase')
+            query = SearchQuery(search_text)
             searched_queryset = Post.objects.annotate(search=SearchVector('content')).filter(
                 search=query)
 
@@ -82,7 +88,8 @@ def index(request):
             'is_liked': is_liked,
             'zipped': zip(is_retweeted, is_liked, result_tweets),
             'show_like': True,
-            'show_comment': True
+            'show_comment': True,
+            'users_to_follow': suggest_users_to_follow(current_user)
         })
 
         # exclude unrelated tweets
@@ -108,7 +115,8 @@ def index(request):
         'is_liked': is_liked,
         'zipped': zip(is_retweeted, is_liked, recent_tweets),
         'show_like': True,
-        'show_comment': True
+        'show_comment': True,
+        'users_to_follow': suggest_users_to_follow(current_user)
     })
 
 

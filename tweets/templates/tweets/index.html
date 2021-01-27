@@ -47,54 +47,41 @@
         <div class="recommendationBox text-sm-center text-lg-left border">
 
             <div class="container text-center align-items-center px-0 pt-2">
-                <h6 class="text">RECENT USERS</h6>
+                <h6 class="text">WHO TO FOLLOW</h6>
             </div>
 
             <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 
-            <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-                 style="min-height: 100%; vertical-align:top">
-                <a href="{% url 'tweets:profile' user.username %}">
-                    <img class="rounded pfpSmol"
-                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                         style="border: 2px solid #51D2B7;"/>
+            {% for suggested_user in users_to_follow %}
+                <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                     style="min-height: 100%; vertical-align:top">
+                    <a href="{% url 'tweets:profile' suggested_user.user.username %}">
+                        {% if suggested_user.profile_img %}
+                            <img class="rounded pfpSmol"
+                                 src="{{ suggested_user.profile_img.url }}"
+                                 style="border: 2px solid #51D2B7;"/>
+                        {% else %}
+                            <img class="rounded pfpSmol"
+                                 src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                 style="border: 2px solid #51D2B7;"/>
+                        {% endif %}
 
-                </a>
-            </div>
-            <div class="pfpThirdBoxOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
-                <div class="align-items-center pt-3">
-                    <b class="text thirdColumnTxt text-center">USERNAME </b>
-                    <div class="justify-self-end ml-auto">
-                        <button class="btn btn-info">
-                            Follow
-                        </button>
+
+                    </a>
+                </div>
+                <div class="pfpThirdBoxOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
+                    <div class="align-items-center pt-3">
+                        <b class="text thirdColumnTxt text-center">{{ suggested_user.user.username }} </b>
+                        <div class="justify-self-end ml-auto">
+                            <button class="btn btn-info">
+                                Follow
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+            {% endfor %}
 
-            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
-
-            <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-                 style="min-height: 100%; vertical-align:top">
-                <a href="{% url 'tweets:profile' user.username %}">
-                    <img class="rounded pfpSmol"
-                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                         style="border: 2px solid #51D2B7;"/>
-
-                </a>
-            </div>
-            <div class="pfpThirdBoxOffset d-md-block d-lg-inline-block px-0 mr-0 mb-2">
-                <div class="align-items-center pt-3">
-                    <b class="text thirdColumnTxt text-center">delete this!</b>
-                    <div class="justify-self-end ml-auto">
-                        <button class="btn btn-info">
-                            Follow
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 
         </div>
     </div>
