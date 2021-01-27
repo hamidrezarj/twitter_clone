@@ -9,6 +9,10 @@ from operator import attrgetter
 from .forms import EditForm
 
 
+def suggest_users_to_follow(current_user):
+    pass
+
+
 def tweets_are_liked_by_user(recent_tweets, current_user):
     is_liked = []
     for i, tweet in enumerate(recent_tweets):
@@ -176,6 +180,7 @@ def profile_view(request, username):
     all_tweets.extend(personal_tweets)
     all_tweets.extend(profile.retweets.all())
     all_tweets.sort(key=attrgetter('pub_date'), reverse=True)
+    all_tweets = set(all_tweets)
 
     logged_in_user = get_object_or_404(Profile, user=request.user)
     is_followed = logged_in_user.following.filter(username=username).exists()

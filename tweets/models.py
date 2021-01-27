@@ -25,7 +25,8 @@ class Post(models.Model):
         return self.content
 
     def __eq__(self, other):
-        return self.profile.user.username == other.profile.user.username and self.content == other.content
+        # return self.profile.user.username == other.profile.user.username and self.content == other.content
+        return self.id == other.id
 
     class Meta:
         ordering = ('-pub_date',)
