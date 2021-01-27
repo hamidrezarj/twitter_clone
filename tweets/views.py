@@ -49,8 +49,8 @@ def index(request):
         recent_tweets.extend(temp.post_set.all())
         recent_tweets.extend(temp.retweets.all().exclude(profile=current_user))
 
+    recent_tweets = list(set(recent_tweets))
     recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
-    recent_tweets = set(recent_tweets)
     # recent_tweets = Post.objects.all().order_by('-pub_date')[:6]
     # is_liked = []
     # for i, tweet in enumerate(recent_tweets):
@@ -179,8 +179,8 @@ def profile_view(request, username):
     all_tweets = []
     all_tweets.extend(personal_tweets)
     all_tweets.extend(profile.retweets.all())
+    all_tweets = list(set(all_tweets))
     all_tweets.sort(key=attrgetter('pub_date'), reverse=True)
-    all_tweets = set(all_tweets)
 
     logged_in_user = get_object_or_404(Profile, user=request.user)
     is_followed = logged_in_user.following.filter(username=username).exists()
