@@ -41,7 +41,7 @@ let loadFile = function (event) {
     }
 
 };
-if(file) {
+if (file) {
     file.onchange = loadFile;
 }
 
@@ -62,7 +62,7 @@ let loadFilePfp = function (event) {
     }
 
 };
-if(pfpfile) {
+if (pfpfile) {
     pfpfile.onchange = loadFilePfp;
 }
 
@@ -207,16 +207,15 @@ window.addEventListener('load', (event) => {
 
     //search bar
     $("#searchTxt1").change(function (event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        console.log('ENTER KEY');
-        if ($(this).val() != "") {
-            $(this).closest('form').submit();
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            console.log('ENTER KEY');
+            if ($(this).val() != "") {
+                $(this).closest('form').submit();
+            }
+
         }
-
-    }
-});
-
+    });
 
 
     // $('#exampleModal').on('hidden.bs.modal', function (e) {
@@ -353,6 +352,26 @@ for (let retBtn of retweetBtns) {
             },
             error: function (error) {
                 console.log('error: ', error)
+            }
+        })
+    }
+}
+
+var deleted_btns = document.getElementsByClassName('delete_btns');
+
+for (let del_btn of deleted_btns) {
+    del_btn.onclick = function (event) {
+        event.preventDefault();
+        console.log(window.location);
+        $.ajax({
+            url: $(this).attr('change-data-url'),
+            data: {},
+            success: function (data) {
+                // window.location.replace('/')
+                if (!data.error)
+                    window.location.reload();
+            }, error() {
+
             }
         })
     }

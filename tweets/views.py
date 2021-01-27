@@ -374,3 +374,17 @@ def retweet_view(request):
     }
 
     return JsonResponse(data)
+
+
+def delete_tweet(request, post_id):
+    print('on delete tweets page')
+    tweet = get_object_or_404(Post, id=post_id)
+    if tweet.profile.user == request.user:
+        tweet.delete()
+        error = False
+    else:
+        error = True
+
+    return JsonResponse({
+        'error': error
+    })

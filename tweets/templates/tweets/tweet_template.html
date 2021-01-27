@@ -43,11 +43,14 @@
             <b class="text text-left pr-2"
                style="align-items: baseline; flex-direction: row;">{{ tweet.profile.user.username }} </b>
             <p class="text text-white-50 m-0">{{ tweet.pub_date|date:"M j, Y" }}</p>
-            {#            <div class="justify-self-end float-right ml-auto">#}
-            {#                <button class="btn btn-info inline">#}
-            {#                    Follow/Delete#}
-            {#                </button>#}
-            {#            </div>#}
+            {% if tweet.profile.user == request.user %}
+                <div class="justify-self-end float-right ml-auto">
+                    <button class="btn btn-dark btn-small inline delete_btns" value="{{ tweet.id }}"
+                            change-data-url="{% url 'tweets:delete_tweet' tweet.id %}">
+                        Delete
+                    </button>
+                </div>
+            {% endif %}
         </div>
         <div>
             <p class="text">{{ tweet.content }}</p>
@@ -56,7 +59,8 @@
             <hr class="my-2" style="border: none">
 
             <div class="tweetImgContainer col-12 p-0 mb-4 d-flex">
-                <img src="https://cdn.discordapp.com/attachments/570604241341775873/762644459543592960/LULUhmmm.png?format=jpg&name=small" alt="Image" class="tweetImg">
+                <img src="https://cdn.discordapp.com/attachments/570604241341775873/762644459543592960/LULUhmmm.png?format=jpg&name=small"
+                     alt="Image" class="tweetImg">
             </div>
             {#            {% if tweet.comment_set %}#}
             {#                {% for c in tweet.comment_set.all %}#}
