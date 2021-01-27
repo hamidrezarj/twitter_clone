@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 .pfpSmol {
     width: 60px;
     height: 60px;
@@ -127,20 +131,20 @@
 @media (min-width: 992px) {
 
     .sideNav {
-        min-width: 180px;
-        max-width: 180px;
+        min-width: 210px;
+        max-width: 210px;
         min-height: 100vh;
         /*vertical-align:top;*/
         /*position: fixed;*/
     }
 
     .navOffset {
-        margin-left: 190px;
+        margin-left: 220px;
     }
 
     .thirdColumn {
-        min-width: calc(40% - 195px);
-        max-width: calc(40% - 195px);
+        min-width: calc(40% - 225px);
+        max-width: calc(40% - 225px);
         /*margin-left: 190px;*/
     }
 }
@@ -175,8 +179,8 @@
 }
 
 .contentsu {
-    min-width: 50%;
-    max-width: 60%;
+    min-width: 55%;
+    max-width: 55%;
 }
 
 .pfpSmolContainer {
@@ -193,6 +197,12 @@
 }
 
 .pfpThirdBoxOffset {
+    width: calc(100% - 100px);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.pfpPopupOffset {
     width: calc(100% - 100px);
     overflow-wrap: break-word;
     word-wrap: break-word;

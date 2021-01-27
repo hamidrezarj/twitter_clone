@@ -33,11 +33,19 @@ var mycloseBTN = document.getElementById('closeBTN');
 // var editModal = document.getElementById('editModal');
 var editModalTrigger = document.getElementById('editTrigger');
 var editCloseBTN = document.getElementById('editCloseBTN');
+
+// var followingModal = document.getElementById('followingModal');
+var followingModalTrigger = document.getElementById('followingTrigger');
+var followingCloseBTN = document.getElementById('followingCloseBTN');
+
+// var followersModal = document.getElementById('followersModal');
+var followersModalTrigger = document.getElementById('followersTrigger');
+var followersCloseBTN = document.getElementById('followersCloseBTN');
 window.addEventListener('load', (event) => {
     console.log("Listeners Added");
-    // $(document).ready(function(){
-    //     $('#editModal').modal("show");
-    // });
+    $(document).ready(function(){
+        $('#followersModal').modal("show");
+    });
 
     if (myInput) {
         myInput.onclick = ev => {
@@ -50,9 +58,7 @@ window.addEventListener('load', (event) => {
         }
     }
 
-    console.log("window loaded!!!!!!!")
     if (editModalTrigger) {
-        console.log("inside")
         editModalTrigger.onclick = ev => {
             $('#editModal').modal("show");
         }
@@ -60,6 +66,28 @@ window.addEventListener('load', (event) => {
     if (editCloseBTN) {
         editCloseBTN.onclick = ev => {
             $('#editModal').modal("hide");
+        }
+    }
+
+    if (followingModalTrigger) {
+        followingModalTrigger.onclick = ev => {
+            $('#followingModal').modal("show");
+        }
+    }
+    if (followingCloseBTN) {
+        followingCloseBTN.onclick = ev => {
+            $('#followingModal').modal("hide");
+        }
+    }
+
+    if (followersModalTrigger) {
+        followersModalTrigger.onclick = ev => {
+            $('#followersModal').modal("show");
+        }
+    }
+    if (followersCloseBTN) {
+        followersCloseBTN.onclick = ev => {
+            $('#followersModal').modal("hide");
         }
     }
 

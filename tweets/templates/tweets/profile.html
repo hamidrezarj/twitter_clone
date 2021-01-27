@@ -141,11 +141,13 @@
                         </div>
                     </div>
                     <div class="container row">
-                        <a href="#" class="col col-8 col-sm-6 col-md-4 col-lg-3">
+                        <a href="#" class="col col-8 col-sm-6 col-md-5 col-lg-3" id="followersTrigger"
+                           data-toggle="modal" data-target="#followersModal">
                             <span>{{ followers|length }} Follower{{ followers|length|pluralize }}</span>
 
                         </a>
-                        <a href="#" class="col col-8 col-sm-6 col-md-4 col-lg-3">
+                        <a href="#" class="col col-8 col-sm-6 col-md-5 col-lg-3" id="followingTrigger"
+                           data-toggle="modal" data-target="#followingModal">
                             <span>{{ followings.count }} Following{{ followings.count|pluralize }}</span>
                         </a>
                     </div>
@@ -171,6 +173,146 @@
         </div>
     {% endif %}
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="followingModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text" id="followingModalLabel">Following Users</h5>
+                    <button type="button" id="followingCloseBTN" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mt-3 px-1">
+                        <div class="text-lg-left">
+
+                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
+                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                                 style="min-height: 100%; vertical-align:top">
+                                <a href="{% url 'tweets:profile' user.username %}">
+                                    <img class="rounded pfpSmol"
+                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                         style="border: 2px solid #51D2B7;"/>
+
+                                </a>
+                            </div>
+                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
+                                <div class="align-items-center pt-3">
+                                    <b class="text thirdColumnTxt">THIS USER IS FOLLOWING: USERNAME</b>
+                                    <div class="justify-self-end ml-auto">
+                                        <button class="btn btn-info">
+                                            Follow
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
+                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                                 style="min-height: 100%; vertical-align:top">
+                                <a href="{% url 'tweets:profile' user.username %}">
+                                    <img class="rounded pfpSmol"
+                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                         style="border: 2px solid #51D2B7;"/>
+
+                                </a>
+                            </div>
+                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
+                                <div class="align-items-center pt-3">
+                                    <b class="text thirdColumnTxt">delete this!</b>
+                                    <div class="justify-self-end ml-auto">
+                                        <button class="btn btn-info">
+                                            Follow
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text" id="followersModalLabel">Followers of User</h5>
+                    <button type="button" id="followersCloseBTN" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mt-3 px-1">
+                        <div class="text-lg-left">
+
+                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
+                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                                 style="min-height: 100%; vertical-align:top">
+                                <a href="{% url 'tweets:profile' user.username %}">
+                                    <img class="rounded pfpSmol"
+                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                         style="border: 2px solid #51D2B7;"/>
+
+                                </a>
+                            </div>
+                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
+                                <div class="align-items-center pt-3">
+                                    <b class="text thirdColumnTxt">THIS USER IS FOLLOWED BY: USERNAME</b>
+                                    <div class="justify-self-end ml-auto">
+                                        <button class="btn btn-info">
+                                            Follow
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
+                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                                 style="min-height: 100%; vertical-align:top">
+                                <a href="{% url 'tweets:profile' user.username %}">
+                                    <img class="rounded pfpSmol"
+                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                         style="border: 2px solid #51D2B7;"/>
+
+                                </a>
+                            </div>
+                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
+                                <div class="align-items-center pt-3">
+                                    <b class="text thirdColumnTxt">delete this!</b>
+                                    <div class="justify-self-end ml-auto">
+                                        <button class="btn btn-info">
+                                            Follow
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
