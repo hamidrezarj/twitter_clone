@@ -6,25 +6,25 @@
     {% if request.user.is_authenticated %}
         <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
              style="min-height: 100vh">
-{#        <h3>{{ user.username }},Welcome to our homepage!</h3>#}
-        {% include 'tweets/post.html' with brand_name='Tweeter' %}
+            {#        <h3>{{ user.username }},Welcome to our homepage!</h3>#}
+            {% include 'tweets/post.html' with brand_name='Tweeter' %}
 
 
-        <!-- Button trigger modal -->
-{#        <button type="button" class="btn btn-primary" id="exampleTrigger" data-toggle="modal"#}
-{#                data-target="#exampleModal">#}
-{#            Launch example modal#}
-{#        </button>#}
+            <!-- Button trigger modal -->
+            {#        <button type="button" class="btn btn-primary" id="exampleTrigger" data-toggle="modal"#}
+            {#                data-target="#exampleModal">#}
+            {#            Launch example modal#}
+            {#        </button>#}
 
-        <div class="partBread lineBreak border-top border-bottom border-tweeter"></div>
+            <div class="partBread lineBreak border-top border-bottom border-tweeter"></div>
 
-        {% for l, t in zipped %}
-            {% include 'tweets/tweet_template.html' with liked=l tweet=t show_like=show_like %}
-            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
-        {% endfor %}
-    {% else %}
-        <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
-             style="min-height: 100vh">
+            {% for r,l, t in zipped %}
+                {% include 'tweets/tweet_template.html' with retweeted=r liked=l tweet=t show_like=show_like %}
+                <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+            {% endfor %}
+            {% else %}
+            <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
+                 style="min-height: 100vh">
                 <div class="col">
                     <h3>You should first log in to see the content.</h3>
                     <a href="{% url 'tweets:login' %}">Log in now</a>
@@ -32,13 +32,13 @@
             </div>
         </div>
     {% endif %}
-</div>
+    </div>
 
     <div class="thirdColumn text-sm-center text-lg-left d-inline-block px-1 border mt-3">
 
-    <div class="container text-center align-items-center px-0 pt-2">
-        <h class="text">RECENT USERS</h>
-    </div>
+        <div class="container text-center align-items-center px-0 pt-2">
+            <h class="text">RECENT USERS</h>
+        </div>
 
         <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 

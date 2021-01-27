@@ -156,15 +156,6 @@ for (let btn of likeBtns) {
 
     btn.onclick = function (event) {
 
-        // // console.log("next-state: ",);
-        // if (btn_state === "Like") {
-        //     // this.innerHTML = "Dislike";
-        //     btn.setAttribute("next-state", "Dislike");
-        // } else {
-        //     // this.innerHTML = "Like";
-        //     btn.setAttribute("next-state", "Like");
-        // }
-
         event.preventDefault();
         let form = $(this).closest("form");
         console.log('hey there');
@@ -231,4 +222,40 @@ function updateLikeCount(elem, addedValue) {
     let newValue = parseInt(elem.innerHTML) + addedValue;
     console.log('new value: ', newValue);
     elem.innerHTML = newValue;
+}
+
+var retweetBtns = document.getElementsByClassName('retweet_btns');
+
+for (let retBtn of retweetBtns) {
+
+    retBtn.onclick = function (event) {
+        console.log('clicked on ret');
+        event.preventDefault();
+        let url_ = $(this).attr('change-data-url');
+        console.log(url_);
+
+        $.ajax({
+            url: url_,
+            data: {
+                'btn_value': $(this).val()
+            },
+            success: function (data) {
+                // let svgElem = $(this).find('svg');
+                // console.log('svg: ', svgElem);
+                if (data.is_retweeted) {
+                    console.log('retweeted successfullly');
+                    //add class retweet button
+                    retBtn.classList.add('retweeted');
+
+
+                } else {
+                    retBtn.classList.remove('retweeted');
+                }
+
+            },
+            error: function (error) {
+                console.log('error: ', error)
+            }
+        })
+    }
 }
