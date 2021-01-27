@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
@@ -80,7 +81,7 @@
                         </div>
                         <div>
 
-                            <p class="text">says: {{ c.content }}</p>
+                            <p class="text">{{ c.content }}</p>
 
                             <hr class="my-4" style="border: none">
                         </div>
@@ -93,4 +94,8 @@
         {% endif %}
 
     </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'tweets/index.js' %}"></script>
 {% endblock %}

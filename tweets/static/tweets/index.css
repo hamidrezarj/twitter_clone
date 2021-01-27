@@ -51,7 +51,7 @@ html {
     background-color: rgba(25, 39, 52, 0.5) !important;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
 
     .pfpThirdBoxOffset {
         width: 100% !important;
@@ -129,6 +129,28 @@ html {
 }
 
 @media (min-width: 992px) {
+
+    .sideNav {
+        min-width: 180px;
+        max-width: 180px;
+        min-height: 100vh;
+        /*vertical-align:top;*/
+        /*position: fixed;*/
+    }
+
+    .navOffset {
+        margin-left: 190px;
+    }
+
+    .thirdColumn {
+        min-width: calc(40% - 195px);
+        max-width: calc(40% - 195px);
+        /*margin-left: 190px;*/
+    }
+}
+
+
+@media (min-width: 1200px) {
 
     .sideNav {
         min-width: 210px;
@@ -264,6 +286,30 @@ html {
     background-color: rgba(25, 39, 52, 0.9) !important;
 }
 
+.popoverBtn {
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 50% !important;
+    /*border: rgb(56, 68, 77) !important;*/
+}
+
+.popoverBtn:hover {
+    color: rgb(29, 161, 242);
+    background-color: rgba(29, 161, 242, 0.1) !important;
+}
+
+.retweetTxt {
+    height: 20px;
+    font-size: 13px;
+    overflow-wrap: normal !important;
+    word-wrap: normal !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.retweetTxtBox {
+    height: 15px;
+}
+
 .retweet {
     color: gray;
 }
@@ -271,4 +317,26 @@ html {
 .retweeted {
     color: white;
     background-color: darkblue;
+}
+
+.searchContainer {
+    background-color: rgba(56, 68, 77, 0.5);
+    border-radius: 2rem;
+}
+
+.searchContainer:focus-within {
+    background-color: rgb(25, 39, 52);
+}
+
+.searchTxt {
+    background: none;
+    border: none;
+    border-radius: 2rem;
+    color: azure;
+}
+
+.searchTxt:focus {
+    background: none;
+    border: none;
+    color: azure;
 }

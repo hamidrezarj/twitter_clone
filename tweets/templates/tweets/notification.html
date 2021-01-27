@@ -1,7 +1,63 @@
 {% extends 'base.html' %}
+{#{% load static %}#}
 
 {% block content %}
 
+    {% if request.user.is_authenticated %}
+        <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
+             style="min-height: 100vh">
+            <h3 class="text text-center">LOGS</h3>
 
+
+            <div class="partBread lineBreak border-top border-bottom border-tweeter"></div>
+
+
+{#            {% for EACH LOG %}#}
+                <div class="tweet-box container mb-0 pt-2 px-0 pb-1"
+                     style="background: none">
+
+                    <div class="text-center pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                         style="min-height: 100%; vertical-align:top; box-sizing: border-box; align-items: stretch; color: rebeccapurple">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-bell-fill" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                    </div>
+                    <div class="pfpSmolOffset d-inline-block pr-0">
+                        <div class="d-flex align-items-center pt-3">
+                            <b class="text text-left pr-2"
+                               style="align-items: baseline; flex-direction: row;">NOTIFICATION HEADER </b>
+                            <p class="text text-white-50 m-0">NOTIFICATION TIME</p>
+                        </div>
+                        <div>
+
+                            <p class="text">NOTIFICATION
+                                CONTENTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</p>
+
+                            <hr class="my-4" style="border: none">
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+{#            {% endfor %}#}
+
+            {% else %}
+            <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
+                 style="min-height: 100vh">
+                <div class="col">
+                    <h3>You should first log in to see the content.</h3>
+                    <a href="{% url 'tweets:login' %}">Log in now</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
 
 {% endblock %}
+
+{#{% block script %}#}
+{#    <script src="{% static 'tweets/index.js' %}"></script>#}
+{#{% endblock %}#}
+

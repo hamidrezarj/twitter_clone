@@ -11,7 +11,7 @@ function validateTweetBox() {
 }
 
 function changeSubmit() {
-    if (!validateTweetBox()) {
+    if (!validateTweetBox()) { // IMPORTANT: AND IF IMG WAS EMPTY
         tweetBoxSubmit.disabled = true;
     } else {
         tweetBoxSubmit.disabled = false;
@@ -41,11 +41,15 @@ var followingCloseBTN = document.getElementById('followingCloseBTN');
 // var followersModal = document.getElementById('followersModal');
 var followersModalTrigger = document.getElementById('followersTrigger');
 var followersCloseBTN = document.getElementById('followersCloseBTN');
+
+// var likesModal = document.getElementById('likesModal');
+var likesModalTrigger = document.getElementById('likesTrigger');
+var likesCloseBTN = document.getElementById('likesCloseBTN');
 window.addEventListener('load', (event) => {
-    console.log("Listeners Added");
-    $(document).ready(function(){
-        $('#followersModal').modal("show");
-    });
+    // console.log("Listeners Added");
+    // $(document).ready(function(){
+    //     $('#likesModal').modal("show");
+    // });
 
     if (myInput) {
         myInput.onclick = ev => {
@@ -88,6 +92,17 @@ window.addEventListener('load', (event) => {
     if (followersCloseBTN) {
         followersCloseBTN.onclick = ev => {
             $('#followersModal').modal("hide");
+        }
+    }
+
+    if (likesModalTrigger) {
+        likesModalTrigger.onclick = ev => {
+            $('#likesModal').modal("show");
+        }
+    }
+    if (likesCloseBTN) {
+        likesCloseBTN.onclick = ev => {
+            $('#likesModal').modal("hide");
         }
     }
 
