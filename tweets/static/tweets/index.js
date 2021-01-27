@@ -25,6 +25,48 @@ if (tweetBox) {
     tweetBox.addEventListener("input", changeSubmit, false)
 }
 
+var file = document.getElementById("imgFile");
+console.log(file)
+let loadFile = function (event) {
+    let output = document.getElementById("uploadImgContainer");
+    let src = URL.createObjectURL(file.files[0]);
+    output.innerHTML = "";
+    console.log("inside baby")
+
+    var e = document.createElement('div');
+    e.innerHTML = "<img src='" + src + "' alt='Image' class='tweetImg'></div>";
+    console.log(e.innerHTML)
+    while (e.firstChild) {
+        output.appendChild(e.firstChild);
+    }
+
+};
+if(file) {
+    file.onchange = loadFile;
+}
+
+
+var pfpfile = document.getElementById("pfpImgFile");
+console.log(pfpfile)
+let loadFilePfp = function (event) {
+    let output = document.getElementById("pfpImgContainer");
+    let src = URL.createObjectURL(pfpfile.files[0]);
+    output.innerHTML = "";
+    console.log("inside baby")
+
+    var e = document.createElement('div');
+    e.innerHTML = "<img src='" + src + "' id='pfpImgContainer2' alt='Image' class='tweetImg rounded-circle'></div>";
+    console.log(e.innerHTML)
+    while (e.firstChild) {
+        output.appendChild(e.firstChild);
+    }
+
+};
+if(pfpfile) {
+    pfpfile.onchange = loadFilePfp;
+}
+
+
 var myModal = document.getElementById('exampleModal');
 var myInput = document.getElementById('exampleTrigger');
 var mycloseBTN = document.getElementById('closeBTN');

@@ -340,3 +340,38 @@ html {
     border: none;
     color: azure;
 }
+
+.tweetImgContainer {
+    flex-basis: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-radius: 16px;
+    border-color: rgb(56, 68, 77);
+    overflow: hidden;
+    border-width: 1px;
+    border-style: solid;
+    align-items: stretch;
+    -webkit-box-orient: vertical;
+    height: 100%;
+    width: 100%;
+}
+
+#pfpImgContainer2 {
+    flex-basis: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    border-style: solid;
+    align-items: stretch;
+    overflow: hidden;
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50%;
+}
+
+#pfpImgFile {
+    background-color: rgb(29, 161, 242) !important;
+}
+
+.tweetImg {
+    inset: 0px;
+}
