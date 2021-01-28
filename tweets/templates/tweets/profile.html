@@ -10,24 +10,6 @@
 
     {% if request.user.is_authenticated %}
 
-        {% for follower in followers %}
-            {{ follower.user.username }}
-            {% if follower.profile_img %}
-                {{ follower.profile_img.url }}
-            {% endif %}
-        {% endfor %}
-
-        {% for following in following_profiles %}
-
-            {{ following.user.username }}
-            {% if following.profile_img %}
-                {{ following.profile_img.url }}
-            {% endif %}
-        {% endfor %}
-
-
-
-
         <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
              style="min-height: 100vh">
 
