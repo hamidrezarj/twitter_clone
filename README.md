@@ -7,8 +7,10 @@
 * users can Retweet each other's tweets.
 
 YOU NEED Postgresql and have to change the password of it on setting.py yourself!
+
 CREATE A VIRTUAL ENVIRONMENT THEN CLONE THIS INTO FOLDER OF env!
-Commands to  inside 'blog-post' folder:
+
+Commands for setup inside 'blog-post' folder:
 ```
 python manage.py makemigrations
 python manage.py makemigrations tweets
