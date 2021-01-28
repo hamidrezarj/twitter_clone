@@ -9,6 +9,25 @@
 {% block content %}
 
     {% if request.user.is_authenticated %}
+
+        {% for follower in followers %}
+            {{ follower.user.username }}
+            {% if follower.profile_img %}
+                {{ follower.profile_img.url }}
+            {% endif %}
+        {% endfor %}
+
+        {% for following in following_profiles %}
+
+            {{ following.user.username }}
+            {% if following.profile_img %}
+                {{ following.profile_img.url }}
+            {% endif %}
+        {% endfor %}
+
+
+
+
         <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
              style="min-height: 100vh">
 
@@ -48,7 +67,7 @@
                                     </div>
                                     <div class="custom-file text-center">
                                         {{ form.profile_img|attr:"id:pfpImgFile"|attr:"class:custom-file-input" }}
-{#                                        <input type="file" accept="image/*" class="text btn btn-info custom-file-input" id="pfpImgFile" for="pfpFile">Choose Image...</input>#}
+                                        {#                                        <input type="file" accept="image/*" class="text btn btn-info custom-file-input" id="pfpImgFile" for="pfpFile">Choose Image...</input>#}
                                         <label class="btn btn-info" for="pfpImgFile">Choose Image...</label>
                                     </div>
                                 </div>

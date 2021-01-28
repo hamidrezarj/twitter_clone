@@ -248,6 +248,9 @@ def profile_view(request, username):
     is_followed = logged_in_user.following.filter(username=username).exists()
 
     followings = profile.following.all().exclude(username=username)
+    following_profiles = []
+    for f in followings:
+        following_profiles.append(f.profile)
     followers = get_user_followers(user_profile)
     print('followers: ', followers)
     is_liked = tweets_are_liked_by_user(all_tweets, logged_in_user)
@@ -263,7 +266,8 @@ def profile_view(request, username):
         'followings': followings,
         'followers': followers,
         'form': EditForm(),
-        'zipped': zip(is_retweeted, is_liked, all_tweets)
+        'zipped': zip(is_retweeted, is_liked, all_tweets),
+        'following_profiles': following_profiles
     })
 
 
