@@ -189,58 +189,41 @@
                 <div class="modal-body">
                     <div class="mt-3 px-1">
                         <div class="text-lg-left">
+                            {% for fing in following_profiles %}
+                                <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 
-                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+                                <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                                     style="min-height: 100%; vertical-align:top">
+                                    <a href="{% url 'tweets:profile' fing.user.username %}">
+                                        {% if fing.profile_img %}
+                                            <img class="rounded pfpSmol"
+                                                 src="{{ fing.profile_img.url }}"
+                                                 style="border: 2px solid #51D2B7;"/>
+                                        {% else %}
+                                            <img class="rounded pfpSmol"
+                                                 src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                                 style="border: 2px solid #51D2B7;"/>
+                                        {% endif %}
 
-                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-                                 style="min-height: 100%; vertical-align:top">
-                                <a href="{% url 'tweets:profile' user.username %}">
-                                    <img class="rounded pfpSmol"
-                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                         style="border: 2px solid #51D2B7;"/>
-
-                                </a>
-                            </div>
-                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
-                                <div class="align-items-center pt-3">
-                                    <b class="text thirdColumnTxt">THIS USER IS FOLLOWING: USERNAME</b>
-                                    <div class="justify-self-end ml-auto">
-                                        <button class="btn btn-info">
-                                            Follow
-                                        </button>
+                                    </a>
+                                </div>
+                                <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
+                                    <div class="align-items-center pt-3">
+                                        <b class="text thirdColumnTxt">{{fing}}</b>
+                                        <div class="justify-self-end ml-auto">
+                                            <button class="btn btn-info">
+                                                Follow
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
-
-                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-                                 style="min-height: 100%; vertical-align:top">
-                                <a href="{% url 'tweets:profile' user.username %}">
-                                    <img class="rounded pfpSmol"
-                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                         style="border: 2px solid #51D2B7;"/>
-
-                                </a>
-                            </div>
-                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
-                                <div class="align-items-center pt-3">
-                                    <b class="text thirdColumnTxt">delete this!</b>
-                                    <div class="justify-self-end ml-auto">
-                                        <button class="btn btn-info">
-                                            Follow
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+                            {% endfor %}
 
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                </div>
+{#                <div class="modal-footer">#}
+{#                </div>#}
             </div>
         </div>
     </div>
@@ -260,57 +243,41 @@
                     <div class="mt-3 px-1">
                         <div class="text-lg-left">
 
-                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+                            {% for fers in followers %}
+                                <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
 
-                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-                                 style="min-height: 100%; vertical-align:top">
-                                <a href="{% url 'tweets:profile' user.username %}">
-                                    <img class="rounded pfpSmol"
-                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                         style="border: 2px solid #51D2B7;"/>
+                                <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
+                                     style="min-height: 100%; vertical-align:top">
+                                    <a href="{% url 'tweets:profile' fers %}">
+                                        {% if fers.profile_img %}
+                                            <img class="rounded pfpSmol"
+                                                 src="{{ fers.profile_img.url }}"
+                                                 style="border: 2px solid #51D2B7;"/>
+                                        {% else %}
+                                            <img class="rounded pfpSmol"
+                                                 src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                                                 style="border: 2px solid #51D2B7;"/>
+                                        {% endif %}
 
-                                </a>
-                            </div>
-                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
-                                <div class="align-items-center pt-3">
-                                    <b class="text thirdColumnTxt">THIS USER IS FOLLOWED BY: USERNAME</b>
-                                    <div class="justify-self-end ml-auto">
-                                        <button class="btn btn-info">
-                                            Follow
-                                        </button>
+                                    </a>
+                                </div>
+                                <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
+                                    <div class="align-items-center pt-3">
+                                        <b class="text thirdColumnTxt">{{fers}}</b>
+                                        <div class="justify-self-end ml-auto">
+                                            <button class="btn btn-info">
+                                                Follow
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
-
-                            <div class="pfpSmolContainer d-inline-block px-0 mt-3 mx-2"
-                                 style="min-height: 100%; vertical-align:top">
-                                <a href="{% url 'tweets:profile' user.username %}">
-                                    <img class="rounded pfpSmol"
-                                         src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                         style="border: 2px solid #51D2B7;"/>
-
-                                </a>
-                            </div>
-                            <div class="pfpPopupOffset d-inline-block px-0 mr-0 mb-2">
-                                <div class="align-items-center pt-3">
-                                    <b class="text thirdColumnTxt">delete this!</b>
-                                    <div class="justify-self-end ml-auto">
-                                        <button class="btn btn-info">
-                                            Follow
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
+                            {% endfor %}
 
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                </div>
+{#                <div class="modal-footer">#}
+{#                </div>#}
             </div>
         </div>
     </div>
