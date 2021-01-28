@@ -36,14 +36,16 @@ def tweets_are_liked_by_user(recent_tweets, current_user):
 
 def tweets_are_retweeted_by_user(recent_tweets, current_user):
     is_retweeted = []
+    retweeted_by_user = []
     for i, tweet in enumerate(recent_tweets):
         # if tweet.likes_set.filter(profile=current_user):
         if current_user in tweet.retweets.all():
             is_retweeted.append(True)
+            retweeted_by_user.append(tweet)
         else:
             is_retweeted.append(False)
 
-    return is_retweeted
+    return is_retweeted, retweeted_by_user
 
 
 # Create your views here.
@@ -82,7 +84,7 @@ def index(request):
         result_tweets.sort(key=attrgetter('pub_date'), reverse=True)
 
         is_liked = tweets_are_liked_by_user(result_tweets, current_user)
-        is_retweeted = tweets_are_retweeted_by_user(result_tweets, current_user)
+        is_retweeted, retweetss = tweets_are_retweeted_by_user(result_tweets, current_user)
 
         return render(request, 'tweets/index.html', {
             'recent_tweets': result_tweets,
@@ -110,12 +112,44 @@ def index(request):
     recent_tweets.sort(key=attrgetter('pub_date'), reverse=True)
 
     is_liked = tweets_are_liked_by_user(recent_tweets, current_user)
-    is_retweeted = tweets_are_retweeted_by_user(recent_tweets, current_user)
+    is_retweeted, retweetss = tweets_are_retweeted_by_user(recent_tweets, current_user)
+
+    rtwt_list = []
+    rtwt_ulist = []
+    for twt in recent_tweets:
+        is_rtwt = True
+        for fing in following_list:
+            temp = get_object_or_404(Profile, user=fing)
+            print(twt)
+            if twt.profile.user.username == fing.username:
+                # print("this is not RETWEETED!")
+                is_rtwt = False
+                break
+        rtwt_list.append(is_rtwt)
+        urtwt = "_"
+        if is_rtwt:
+            for pfs in twt.retweets.all():
+                for fing in following_list:
+                    temp = get_object_or_404(Profile, user=fing)
+                    if pfs.user.username == fing.username:
+                        print("RETWEETED USER IS: " + fing.username)
+                        urtwt = fing.username
+                        break
+                if urtwt != "_":
+                    # print("yay")
+                    break
+            rtwt_ulist.append(urtwt)
+        else:
+            rtwt_ulist.append(urtwt)
+
+    print(rtwt_list)
+    print(rtwt_ulist)
+
 
     return render(request, 'tweets/index.html', {
         'recent_tweets': recent_tweets,
         'is_liked': is_liked,
-        'zipped': zip(is_retweeted, is_liked, recent_tweets),
+        'zipped': zip(is_retweeted, is_liked, recent_tweets, rtwt_list, rtwt_ulist),
         'show_like': True,
         'show_comment': True,
         'users_to_follow': suggest_users_to_follow(current_user),
@@ -248,10 +282,13 @@ def profile_view(request, username):
     is_followed = logged_in_user.following.filter(username=username).exists()
 
     followings = profile.following.all().exclude(username=username)
+    following_profiles = []
+    for f in followings:
+        following_profiles.append(f.profile)
     followers = get_user_followers(user_profile)
     print('followers: ', followers)
     is_liked = tweets_are_liked_by_user(all_tweets, logged_in_user)
-    is_retweeted = tweets_are_retweeted_by_user(all_tweets, logged_in_user)
+    is_retweeted, retweetss = tweets_are_retweeted_by_user(all_tweets, logged_in_user)
 
     return render(request, 'tweets/profile.html', {
         'tweets': all_tweets,
@@ -263,7 +300,8 @@ def profile_view(request, username):
         'followings': followings,
         'followers': followers,
         'form': EditForm(),
-        'zipped': zip(is_retweeted, is_liked, all_tweets)
+        'zipped': zip(is_retweeted, is_liked, all_tweets),
+        'following_profiles': following_profiles
     })
 
 
@@ -413,7 +451,7 @@ def show_likes(request, post_id):
         if l.profile_img:
             profile_imgs.append(l.profile_img.url)
         else:
-            profile_imgs.append(0)
+            profile_imgs.append("https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg")
 
     print('profile imgs', profile_imgs)
 

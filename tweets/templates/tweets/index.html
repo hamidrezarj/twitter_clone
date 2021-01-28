@@ -18,8 +18,8 @@
 
             <div class="partBread lineBreak border-top border-bottom border-tweeter"></div>
 
-            {% for r,l, t in zipped %}
-                {% include 'tweets/tweet_template.html' with retweeted=r liked=l tweet=t show_like=show_like %}
+            {% for r, l, t, rtwt, rtwtu in zipped %}
+                {% include 'tweets/tweet_template.html' with retweeted=r liked=l tweet=t show_like=show_like rtwt=rtwt rtwtu=rtwtu %}
                 <hr class="my-2 lineBreak" style="width: 100%; background-color: white; margin:-1px 0;">
             {% endfor %}
             {% else %}

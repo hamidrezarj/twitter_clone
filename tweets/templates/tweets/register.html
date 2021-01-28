@@ -2,13 +2,13 @@
 
 {% block content %}
 
-{#    {% if error_message %}#}
-{#        <p>User with username <b>{{ username }}</b> already exists.</p>#}
-{#    {% endif %}#}
-{##}
-{#    {% if pass_error %}#}
-{#        <p>Passwords don't match!</p>#}
-{#    {% endif %}#}
+    {% if error_message %}
+        <p>User with username <b>{{ username }}</b> already exists.</p>
+    {% endif %}
+
+    {% if pass_error %}
+        <p>Passwords don't match!</p>
+    {% endif %}
     <div class="d-inline-block contentsu navOffset d-inline-block px-1 border-left border-right border-tweeter"
          style="min-height: 100vh">
         <form action="{% url 'tweets:register' %}" method="post">
