@@ -1,4 +1,4 @@
-#twitter clone
+### A twitter like app with same features implemented with Django 2.2
 
 ### Some features are:
 * users can Post their tweets.
@@ -6,7 +6,7 @@
 * users can Like each other's tweets.
 * users can Retweet each other's tweets.
 
-YOU NEED Postgresql and have to change the password of it on setting.py yourself!
+#### Note: YOU NEED Postgresql and have to change the password of it on setting.py yourself!
 
 CREATE A VIRTUAL ENVIRONMENT THEN CLONE THIS INTO FOLDER OF env!
 
